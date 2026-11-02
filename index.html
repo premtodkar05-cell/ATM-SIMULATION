@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classroom ATM Simulation | Online Web Edition</title>
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes cashDispense {
+      0% { transform: translateY(100%); opacity: 0; }
+      50% { transform: translateY(20%); opacity: 1; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+    .animate-cash {
+      animation: cashDispense 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .crt-glow {
+      box-shadow: inset 0 0 20px rgba(16, 185, 129, 0.15);
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center justify-between p-4 sm:p-6 font-sans">
+
+  <!-- Top Navigation & Badges -->
+  <header class="w-full max-w-4xl flex flex-wrap items-center justify-between gap-3 py-2 border-b border-slate-800">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/30">
+        ATM
+      </div>
+      <div>
+        <h1 class="text-sm font-bold tracking-wider text-white uppercase">State Bank Simulation</h1>
+        <p class="text-[11px] text-slate-400">Classroom Project (BCA/MCA Practical)</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+        ● Vercel Cloud Live
+      </span>
+      <button onclick="resetDemoData()" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1 rounded-md text-slate-300 border border-slate-700 transition">
+        Reset Demo
+      </button>
+    </div>
+  </header>
+
+  <!-- Main ATM Kiosk Chassis -->
+  <main class="w-full max-w-4xl my-6 grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-800/80 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-slate-700 shadow-2xl">
+    
+    <!-- LEFT: ATM Screen (CRT Style) (col-span-7) -->
+    <section class="lg:col-span-7 flex flex-col justify-between bg-slate-950 rounded-2xl border-4 border-slate-800 crt-glow p-5 sm:p-6 min-h-[460px] shadow-inner relative overflow-hidden">
+      
+      <!-- Screen Header -->
+      <div class="border-b border-slate-800/80 pb-3 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-xs font-mono text-emerald-400 font-bold tracking-wider">SECURE BANKING TERMINAL</span>
+        </div>
+        <span class="text-[11px] font-mono text-slate-500" id="clockDisplay">--:--:--</span>
+      </div>
+
+      <!-- VIEW 1: WELCOME / INSERT CARD / LOGIN -->
+      <div id="screenLogin" class="my-auto py-6 space-y-5 text-center">
+        <div class="inline-block p-4 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 mb-1">
+          <svg class="w-10 h-10 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <rect width="20" height="14" x="2" y="5" rx="2" stroke-width="2"/>
+            <line x1="2" x2="22" y1="10" y2="10" stroke-width="2"/>
+          </svg>
+        </div>
+
+        <div>
+          <h2 class="text-xl font-bold text-white tracking-wide">PLEASE AUTHENTICATE</h2>
+          <p class="text-xs text-slate-400 mt-1">Insert card credentials or use the student demo account</p>
+        </div>
+
+        <div class="max-w-xs mx-auto space-y-3 text-left">
+          <div>
+            <label class="block text-[10px] font-mono uppercase text-slate-400 mb-1">Account Number</label>
+            <input type="text" id="screenAccInput" value="1001001"
+                   class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-white font-mono focus:border-blue-500 focus:outline-none">
+          </div>
+          <div>
+            <label class="block text-[10px] font-mono uppercase text-slate-400 mb-1">4-Digit ATM PIN</label>
+            <input type="password" id="screenPinInput" maxlength="4" placeholder="••••" value="1234"
+                   class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-center tracking-widest text-white font-mono focus:border-blue-500 focus:outline-none">
+          </div>
+
+          <div id="screenLoginError" class="hidden text-xs text-rose-400 bg-rose-950/40 border border-rose-800 p-2 rounded text-center"></div>
+
+          <button onclick="loginWithScreen()" 
+                  class="w-full py-2.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs tracking-wider uppercase transition shadow-lg shadow-blue-600/30">
+            Confirm & Enter
+          </button>
+        </div>
+
+        <div class="pt-2 text-[11px] text-slate-500 font-mono">
+          Demo: <span class="text-slate-300">1001001</span> | PIN: <span class="text-slate-300">1234</span>
+        </div>
+      </div>
+
+      <!-- VIEW 2: DASHBOARD -->
+      <div id="screenDashboard" class="hidden space-y-5 my-auto">
+        <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+          <div>
+            <p class="text-xs text-slate-400">Welcome,</p>
+            <h3 class="text-base font-bold text-white" id="dashboardHolder">Demo Student</h3>
+            <p class="text-xs font-mono text-slate-400">Acc #<span id="dashboardAcc">1001001</span></p>
+          </div>
+          <button onclick="logout()" 
+                  class="px-3 py-1.5 rounded-lg bg-rose-600/80 hover:bg-rose-600 text-white text-xs font-semibold transition">
+            Exit / Eject
+          </button>
+        </div>
+
+        <!-- Balance Display -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 text-center">
+          <span class="text-[10px] uppercase font-mono tracking-widest text-slate-400">Available Account Balance</span>
+          <div class="text-3xl sm:text-4xl font-extrabold text-emerald-400 font-mono tracking-tight my-1" id="balanceText">
+            ₹5,000.00
+          </div>
+          <span class="text-[10px] text-slate-500">Virtual Currency (ACID Atomic Storage)</span>
+        </div>
+
+        <!-- ATM Options (6 Button Layout) -->
+        <div class="grid grid-cols-2 gap-2.5">
+          <button onclick="showBalancePrompt()" class="p-3 bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-blue-500/50 rounded-xl text-left transition group">
+            <div class="text-xs font-bold text-blue-400 group-hover:text-blue-300">1. Balance Inquiry</div>
+            <div class="text-[10px] text-slate-500">View & print receipt</div>
+          </button>
+          
+          <button onclick="openAction('DEPOSIT')" class="p-3 bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-emerald-500/50 rounded-xl text-left transition group">
+            <div class="text-xs font-bold text-emerald-400 group-hover:text-emerald-300">2. Cash Deposit</div>
+            <div class="text-[10px] text-slate-500">Atomic balance credit</div>
+          </button>
+
+          <button onclick="openAction('WITHDRAWAL')" class="p-3 bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-amber-500/50 rounded-xl text-left transition group">
+            <div class="text-xs font-bold text-amber-400 group-hover:text-amber-300">3. Fast Cash / Withdraw</div>
+            <div class="text-[10px] text-slate-500">Dispense notes</div>
+          </button>
+
+          <button onclick="openStatement()" class="p-3 bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-indigo-500/50 rounded-xl text-left transition group">
+            <div class="text-xs font-bold text-indigo-400 group-hover:text-indigo-300">4. Mini Statement</div>
+            <div class="text-[10px] text-slate-500">Recent audit transactions</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- VIEW 3: INPUT AMOUNT (DEPOSIT / WITHDRAW) -->
+      <div id="screenAction" class="hidden space-y-4 my-auto">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider" id="actionTitle">ENTER AMOUNT</h3>
+          <button onclick="backToDashboard()" class="text-xs text-slate-400 hover:text-white">← Cancel</button>
+        </div>
+
+        <div class="text-center py-2">
+          <label class="block text-xs text-slate-400 mb-1">Enter Transaction Amount (₹)</label>
+          <div class="max-w-xs mx-auto relative">
+            <span class="absolute left-3 top-2.5 font-mono text-slate-400">₹</span>
+            <input type="number" id="screenAmountInput" step="0.01" min="1" placeholder="500.00"
+                   class="w-full pl-8 pr-4 py-2.5 bg-slate-900 border border-slate-700 rounded-lg text-lg text-white font-mono text-center focus:border-blue-500 focus:outline-none">
+          </div>
+          <div class="flex justify-center gap-2 mt-2">
+            <button onclick="setQuickAmount(500)" class="text-xs bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded text-slate-300 border border-slate-700">₹500</button>
+            <button onclick="setQuickAmount(1000)" class="text-xs bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded text-slate-300 border border-slate-700">₹1,000</button>
+            <button onclick="setQuickAmount(2000)" class="text-xs bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded text-slate-300 border border-slate-700">₹2,000</button>
+            <button onclick="setQuickAmount(5000)" class="text-xs bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded text-slate-300 border border-slate-700">₹5,000</button>
+          </div>
+        </div>
+
+        <div id="screenActionError" class="hidden text-xs text-rose-400 bg-rose-950/40 border border-rose-800 p-2 rounded text-center"></div>
+
+        <button onclick="submitAction()" 
+                id="actionSubmitBtn"
+                class="w-full max-w-xs mx-auto block py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg">
+          Confirm Transaction
+        </button>
+      </div>
+
+      <!-- VIEW 4: MINI STATEMENT TABLE -->
+      <div id="screenStatement" class="hidden space-y-3 my-auto">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <div>
+            <h3 class="text-xs font-bold text-white uppercase tracking-wider">Mini Statement (JTable Replica)</h3>
+            <p class="text-[10px] text-slate-400">Newest transactions first</p>
+          </div>
+          <button onclick="backToDashboard()" class="text-xs bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded text-white">← Return</button>
+        </div>
+
+        <div class="max-h-56 overflow-y-auto border border-slate-800 rounded-lg">
+          <table class="w-full text-[11px] text-left">
+            <thead class="bg-slate-900 text-slate-300 border-b border-slate-800 font-mono">
+              <tr>
+                <th class="p-2 text-center">ID</th>
+                <th class="p-2">Date</th>
+                <th class="p-2 text-center">Type</th>
+                <th class="p-2 text-right">Amount (₹)</th>
+              </tr>
+            </thead>
+            <tbody id="statementTableBody" class="divide-y divide-slate-800/60 font-mono">
+              <!-- Inserted via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Screen Footer -->
+      <div class="border-t border-slate-800/80 pt-2 flex items-center justify-between text-[10px] font-mono text-slate-500">
+        <span>DEVICE: ATM-7821</span>
+        <span>STATUS: READY</span>
+      </div>
+    </section>
+
+    <!-- RIGHT: PHYSICAL ATM HARDWARE CONTROLS (col-span-5) -->
+    <section class="lg:col-span-5 flex flex-col justify-between space-y-6 bg-slate-900/60 p-5 rounded-2xl border border-slate-800">
+      
+      <!-- Card Slot -->
+      <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+        <div class="flex justify-between items-center text-xs text-slate-400">
+          <span class="font-bold uppercase tracking-wider text-[10px]">ATM Card Slot</span>
+          <span class="text-emerald-400 text-[10px] animate-pulse">● Ready</span>
+        </div>
+        <div class="h-3 bg-black rounded-full border border-slate-700 shadow-inner flex items-center justify-center">
+          <div class="w-24 h-1 bg-emerald-500/80 rounded-full animate-pulse"></div>
+        </div>
+        <button onclick="autoFillAndLogin()" class="w-full py-1.5 text-xs bg-slate-800 hover:bg-slate-700 rounded border border-slate-700 text-slate-300 transition">
+          💳 Tap Student Demo Card
+        </button>
+      </div>
+
+      <!-- Physical Numeric Keypad -->
+      <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider text-center">ATM Hardware Keypad</div>
+        <div class="grid grid-cols-3 gap-2 max-w-[220px] mx-auto">
+          <button onclick="pressKey('1')" class="h-10 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-sm font-bold text-white shadow">1</button>
+          <button onclick="pressKey('2')" class="h-10 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-sm font-bold text-white shadow">2</button>
+          <button onclick="pressKey('3')" class="h-10 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-sm font-bold text-white shadow">3</button>
+
+          <button onclick="pressKey('4')" class="h-10 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-sm font-bold text-white shadow">4</button>
+          <button onclick="pressKey('5')" class="h-10 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-sm font-bold text-white shadow">5</button>
+          <button onclick="pressKey('6')" class="h-10 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-sm font-bold text-white shadow">6</button>
+
+          <button onclick="pressKey('7')" class="h-10 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-sm font-bold text-white shadow">7</button>
+          <button onclick="pressKey('8')" class="h-10 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-sm font-bold text-white shadow">8</button>
+          <button onclick="pressKey('9')" class="h-10 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-sm font-bold text-white shadow">9</button>
+
+          <button onclick="clearKeypad()" class="h-10 bg-amber-600/80 hover:bg-amber-600 active:bg-amber-700 rounded-lg text-xs font-bold text-white shadow">CLEAR</button>
+          <button onclick="pressKey('0')" class="h-10 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-sm font-bold text-white shadow">0</button>
+          <button onclick="enterKeypad()" class="h-10 bg-emerald-600/80 hover:bg-emerald-600 active:bg-emerald-700 rounded-lg text-xs font-bold text-white shadow">ENTER</button>
+        </div>
+      </div>
+
+      <!-- Cash Dispenser Slot & Receipt Slot -->
+      <div class="space-y-3">
+        <!-- Cash Tray -->
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+          <div class="flex justify-between items-center text-[10px] text-slate-400 mb-1">
+            <span class="font-bold uppercase tracking-wider">Cash Dispenser</span>
+            <span id="cashIndicator" class="text-slate-500">Standby</span>
+          </div>
+          <div id="cashTray" class="h-8 bg-black rounded border border-slate-700 relative overflow-hidden flex items-center justify-center">
+            <div id="cashNotes" class="hidden text-xs font-mono font-bold bg-emerald-500 text-slate-950 px-3 py-1 rounded shadow-lg animate-cash">
+              💵 ₹ CASH DISPENSED 💵
+            </div>
+          </div>
+        </div>
+
+        <!-- Receipt Printer Slot -->
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+          <div class="flex justify-between items-center text-[10px] text-slate-400 mb-1">
+            <span class="font-bold uppercase tracking-wider">Receipt Slot</span>
+            <button onclick="printReceipt()" class="text-blue-400 hover:underline">Print Slip</button>
+          </div>
+          <div class="h-2 bg-black rounded-full border border-slate-700"></div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- RECEIPT MODAL -->
+  <div id="receiptModal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <div class="bg-amber-50 text-slate-900 border border-amber-200 rounded-lg max-w-xs w-full p-6 space-y-3 shadow-2xl font-mono text-xs">
+      <div class="text-center border-b border-dashed border-slate-400 pb-2">
+        <h4 class="font-bold text-sm tracking-widest">STATE BANK SIMULATION</h4>
+        <p class="text-[10px] text-slate-600">ATM TRANSACTION RECORD</p>
+        <p class="text-[10px] text-slate-500" id="receiptTime">--</p>
+      </div>
+      <div class="space-y-1 text-[11px]">
+        <div class="flex justify-between"><span>ACCOUNT:</span><span>XXXX 1001</span></div>
+        <div class="flex justify-between"><span>HOLDER:</span><span>Demo Student</span></div>
+        <div class="flex justify-between"><span>TX REF:</span><span id="receiptRef">TX-901</span></div>
+        <div class="flex justify-between"><span>CURRENCY:</span><span>INR (₹)</span></div>
+        <div class="flex justify-between font-bold text-sm border-t border-b border-dashed border-slate-400 py-1.5 my-1">
+          <span>BALANCE:</span><span id="receiptBal">₹5,000.00</span>
+        </div>
+      </div>
+      <div class="text-center text-[10px] text-slate-600 pt-1">
+        *** CLASSROOM ACADEMIC VIVA DEMO ***<br>
+        Thank you for banking with us.
+      </div>
+      <div class="pt-2 flex gap-2">
+        <button onclick="window.print()" class="flex-1 py-1.5 bg-slate-900 text-white rounded text-xs font-sans font-bold">Print</button>
+        <button onclick="closeReceipt()" class="flex-1 py-1.5 border border-slate-300 text-slate-700 rounded text-xs font-sans">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Information -->
+  <footer class="w-full max-w-4xl py-3 border-t border-slate-800 text-center text-xs text-slate-500 space-y-1">
+    <p>Project Stack: Java 17 • Swing GUI • JDBC • MySQL 8 • Vercel Cloud Web Edition</p>
+    <p class="text-[11px] text-slate-600">Simulated fake currency for BCA/MCA viva demonstration. Data persists in browser storage across sessions.</p>
+  </footer>
+
+  <!-- Web Audio Synthesizer & Controller Script -->
+  <script>
+    // Simple Web Audio Sound Effects Synthesizer (No external mp3s needed!)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function beep(freq = 600, duration = 0.08, type = 'sine') {
+      try {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // State Management (Saved in localStorage so data persists across reloads)
+    const STORAGE_KEY = 'ATM_SIMULATION_DATA_V1';
+    let appState = loadState();
+
+    function defaultState() {
+      return {
+        accountNumber: '1001001',
+        holderName: 'Demo Student',
+        pin: '1234',
+        balance: 5000.00,
+        transactions: [
+          { id: 1, type: 'DEPOSIT', amount: 5000.00, date: new Date().toLocaleString('en-IN') }
+        ]
+      };
+    }
+
+    function loadState() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) return JSON.parse(stored);
+      } catch (e) {}
+      return defaultState();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (e) {}
+    }
+
+    function resetDemoData() {
+      if (confirm('Reset demo balance to ₹5,000.00?')) {
+        appState = defaultState();
+        saveState();
+        updateBalanceUI();
+        alert('Demo data has been reset to initial ₹5,000.00 balance.');
+      }
+    }
+
+    let currentActionType = 'DEPOSIT';
+    let activeInputId = 'screenPinInput';
+
+    // Clock
+    setInterval(() => {
+      const el = document.getElementById('clockDisplay');
+      if (el) el.innerText = new Date().toLocaleTimeString('en-IN');
+    }, 1000);
+
+    function formatINR(num) {
+      return '₹' + Number(num).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function updateBalanceUI() {
+      document.getElementById('balanceText').innerText = formatINR(appState.balance);
+    }
+
+    // Keypad handlers
+    function pressKey(key) {
+      beep(700, 0.05);
+      const input = document.getElementById(activeInputId);
+      if (input) {
+        if (input.maxLength && input.value.length >= input.maxLength) return;
+        input.value += key;
+      }
+    }
+
+    function clearKeypad() {
+      beep(400, 0.08);
+      const input = document.getElementById(activeInputId);
+      if (input) input.value = '';
+    }
+
+    function enterKeypad() {
+      beep(900, 0.1);
+      if (activeInputId === 'screenPinInput' || activeInputId === 'screenAccInput') {
+        loginWithScreen();
+      } else if (activeInputId === 'screenAmountInput') {
+        submitAction();
+      }
+    }
+
+    function autoFillAndLogin() {
+      beep(880, 0.15);
+      document.getElementById('screenAccInput').value = '1001001';
+      document.getElementById('screenPinInput').value = '1234';
+      loginWithScreen();
+    }
+
+    function loginWithScreen() {
+      const acc = document.getElementById('screenAccInput').value.trim();
+      const pin = document.getElementById('screenPinInput').value.trim();
+      const err = document.getElementById('screenLoginError');
+
+      if (!acc) {
+        showError(err, 'Account Number cannot be blank.');
+        return;
+      }
+      if (!/^\d{4}$/.test(pin)) {
+        showError(err, 'PIN must be exactly 4 numeric digits.');
+        return;
+      }
+      if (acc !== appState.accountNumber || pin !== appState.pin) {
+        showError(err, 'Invalid account number or incorrect PIN.');
+        return;
+      }
+
+      err.classList.add('hidden');
+      document.getElementById('screenLogin').classList.add('hidden');
+      document.getElementById('screenDashboard').classList.remove('hidden');
+      updateBalanceUI();
+      activeInputId = 'screenAmountInput';
+      beep(1000, 0.2);
+    }
+
+    function logout() {
+      beep(450, 0.1);
+      document.getElementById('screenDashboard').classList.add('hidden');
+      document.getElementById('screenAction').classList.add('hidden');
+      document.getElementById('screenStatement').classList.add('hidden');
+      document.getElementById('screenLogin').classList.remove('hidden');
+      document.getElementById('screenPinInput').value = '';
+      activeInputId = 'screenPinInput';
+    }
+
+    function backToDashboard() {
+      document.getElementById('screenAction').classList.add('hidden');
+      document.getElementById('screenStatement').classList.add('hidden');
+      document.getElementById('screenDashboard').classList.remove('hidden');
+      updateBalanceUI();
+    }
+
+    function showBalancePrompt() {
+      beep(800, 0.08);
+      alert(`Account Holder: ${appState.holderName}\nAccount Number: ${appState.accountNumber}\n\nAvailable Balance: ${formatINR(appState.balance)}`);
+    }
+
+    function openAction(type) {
+      currentActionType = type;
+      beep(700, 0.06);
+      document.getElementById('screenDashboard').classList.add('hidden');
+      document.getElementById('screenAction').classList.remove('hidden');
+
+      const title = document.getElementById('actionTitle');
+      const submitBtn = document.getElementById('actionSubmitBtn');
+      const err = document.getElementById('screenActionError');
+      err.classList.add('hidden');
+      document.getElementById('screenAmountInput').value = '';
+      activeInputId = 'screenAmountInput';
+
+      if (type === 'DEPOSIT') {
+        title.innerText = 'CASH DEPOSIT (₹)';
+        submitBtn.className = 'w-full max-w-xs mx-auto block py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg';
+        submitBtn.innerText = 'Deposit Cash';
+      } else {
+        title.innerText = 'CASH WITHDRAWAL (₹)';
+        submitBtn.className = 'w-full max-w-xs mx-auto block py-2.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg';
+        submitBtn.innerText = 'Dispense Cash';
+      }
+    }
+
+    function setQuickAmount(amt) {
+      beep(650, 0.05);
+      document.getElementById('screenAmountInput').value = amt;
+    }
+
+    function submitAction() {
+      const input = document.getElementById('screenAmountInput').value.trim();
+      const err = document.getElementById('screenActionError');
+      const amt = parseFloat(input);
+
+      if (isNaN(amt) || amt <= 0) {
+        showError(err, 'Amount must be greater than zero.');
+        return;
+      }
+      if ((amt.toString().split('.')[1] || '').length > 2) {
+        showError(err, 'Amount cannot have more than 2 decimal places (paise).');
+        return;
+      }
+
+      if (currentActionType === 'WITHDRAWAL') {
+        if (amt > appState.balance) {
+          showError(err, `Insufficient funds! Current balance: ${formatINR(appState.balance)}`);
+          beep(250, 0.2, 'sawtooth');
+          return;
+        }
+        appState.balance -= amt;
+        triggerCashDispense(amt);
+      } else {
+        appState.balance += amt;
+        beep(1200, 0.15);
+      }
+
+      // Add audit log
+      const newId = appState.transactions.length + 1;
+      appState.transactions.unshift({
+        id: newId,
+        type: currentActionType,
+        amount: amt,
+        date: new Date().toLocaleString('en-IN')
+      });
+
+      saveState();
+      alert(`Transaction Successful!\n\nType: ${currentActionType}\nAmount: ${formatINR(amt)}\nUpdated Balance: ${formatINR(appState.balance)}`);
+      backToDashboard();
+    }
+
+    function triggerCashDispense(amt) {
+      const notes = document.getElementById('cashNotes');
+      const indicator = document.getElementById('cashIndicator');
+      notes.innerText = `💵 DISPENSED: ${formatINR(amt)} 💵`;
+      notes.classList.remove('hidden');
+      indicator.innerText = 'Dispensing...';
+      indicator.className = 'text-emerald-400 font-bold animate-pulse';
+
+      setTimeout(() => {
+        notes.classList.add('hidden');
+        indicator.innerText = 'Standby';
+        indicator.className = 'text-slate-500';
+      }, 4000);
+    }
+
+    function openStatement() {
+      beep(700, 0.08);
+      document.getElementById('screenDashboard').classList.add('hidden');
+      document.getElementById('screenStatement').classList.remove('hidden');
+
+      const tbody = document.getElementById('statementTableBody');
+      tbody.innerHTML = '';
+
+      appState.transactions.forEach(tx => {
+        const isDep = tx.type === 'DEPOSIT';
+        const badge = isDep 
+          ? `<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-400">DEPOSIT</span>`
+          : `<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-400">WITHDRAW</span>`;
+
+        tbody.innerHTML += `
+          <tr class="hover:bg-slate-900/50">
+            <td class="p-2 text-center text-slate-500">#${tx.id}</td>
+            <td class="p-2 text-slate-300">${tx.date}</td>
+            <td class="p-2 text-center">${badge}</td>
+            <td class="p-2 text-right font-bold ${isDep ? 'text-emerald-400' : 'text-amber-400'}">${formatINR(tx.amount)}</td>
+          </tr>
+        `;
+      });
+    }
+
+    function printReceipt() {
+      beep(800, 0.1);
+      document.getElementById('receiptTime').innerText = new Date().toLocaleString('en-IN');
+      document.getElementById('receiptBal').innerText = formatINR(appState.balance);
+      document.getElementById('receiptRef').innerText = 'TX-' + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('receiptModal').classList.remove('hidden');
+    }
+
+    function closeReceipt() {
+      document.getElementById('receiptModal').classList.add('hidden');
+    }
+
+    function showError(el, msg) {
+      el.innerText = msg;
+      el.classList.remove('hidden');
+      beep(300, 0.15, 'triangle');
+    }
+  </script>
+</body>
+</html>

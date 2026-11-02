@@ -1,0 +1,352 @@
+<!-- Link to the artifact preview or standalone browser preview -->
+<!-- Double-click this file in Windows Explorer to open the interactive ATM simulator in your web browser -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Classroom ATM Simulation - Interactive Web Preview</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased p-6 flex items-center justify-center min-h-screen">
+
+  <div class="max-w-xl w-full bg-white border border-slate-200 rounded-2xl shadow-2xl overflow-hidden">
+    
+    <!-- Top ATM Header -->
+    <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white p-6 text-center">
+      <div class="flex items-center justify-between mb-2">
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-800 text-blue-200 border border-blue-700">
+          ● Interactive Preview
+        </span>
+        <span class="text-xs text-blue-200">Java Swing + MySQL Project</span>
+      </div>
+      <h1 class="text-2xl font-bold tracking-wide">CLASSROOM ATM SIMULATION</h1>
+      <p class="text-xs text-blue-200 mt-1">BCA / MCA Practical Examination Project (Virtual Currency)</p>
+    </div>
+
+    <!-- VIEW 1: LOGIN SCREEN -->
+    <div id="loginView" class="p-8 space-y-6">
+      <div class="text-center space-y-1">
+        <h2 class="text-lg font-semibold text-slate-800">Cardholder Authentication</h2>
+        <p class="text-xs text-slate-500">Enter your virtual credentials to access your demo account</p>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Account Number</label>
+          <input type="text" id="accInput" value="1001001" placeholder="e.g. 1001001"
+                 class="w-full px-4 py-2.5 text-sm rounded-lg border border-slate-300 bg-slate-50 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">4-Digit ATM PIN</label>
+          <input type="password" id="pinInput" value="1234" maxlength="4" placeholder="••••"
+                 class="w-full px-4 py-2.5 text-sm rounded-lg border border-slate-300 bg-slate-50 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none tracking-widest text-center">
+        </div>
+
+        <div id="loginError" class="hidden text-xs text-rose-600 bg-rose-50 border border-rose-200 p-2.5 rounded-lg text-center font-medium"></div>
+
+        <button onclick="handleLogin()" 
+                class="w-full py-3 px-4 rounded-lg bg-blue-700 hover:bg-blue-800 active:scale-[0.99] text-white font-semibold text-sm transition shadow-md">
+          Enter ATM / Login
+        </button>
+
+        <button onclick="fillDemo()" 
+                class="w-full py-2 px-3 rounded-lg border border-slate-200 bg-slate-100 hover:bg-slate-200 text-xs text-slate-700 transition">
+          Auto-Fill Demo Account (1001001 / 1234)
+        </button>
+      </div>
+
+      <div class="text-center text-xs text-slate-500 border-t border-slate-100 pt-4">
+        Database: <code class="font-mono bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">atm_db</code> • Default Demo: <b>1001001</b> | PIN: <b>1234</b>
+      </div>
+    </div>
+
+    <!-- VIEW 2: DASHBOARD SCREEN -->
+    <div id="dashboardView" class="hidden p-8 space-y-6">
+      
+      <!-- User Info & Logout -->
+      <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+        <div>
+          <div class="text-xs text-slate-500">Account Holder</div>
+          <div class="text-base font-bold text-slate-800" id="holderName">Demo Student</div>
+          <div class="text-xs font-mono text-slate-500">Acc #<span id="holderAcc">1001001</span></div>
+        </div>
+        <button onclick="handleLogout()" 
+                class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-rose-600 hover:bg-rose-700 text-white transition shadow-sm">
+          Logout
+        </button>
+      </div>
+
+      <!-- Current Balance Card -->
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 text-center shadow-inner space-y-1">
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-500">Current Account Balance</div>
+        <div class="text-4xl font-extrabold text-emerald-600 tracking-tight" id="balanceDisplay">₹5,000.00</div>
+        <div class="text-xs text-slate-400 italic">ACID Transaction Guaranteed • Virtual Money</div>
+      </div>
+
+      <!-- 2x2 Action Buttons -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        
+        <!-- Action 1: Check Balance -->
+        <button onclick="checkBalanceModal()" 
+                class="p-4 rounded-xl border border-slate-200 bg-white hover:border-blue-500 hover:bg-blue-50/50 text-left transition group">
+          <div class="text-sm font-bold text-blue-700 group-hover:text-blue-800 flex items-center justify-between">
+            <span>1. Check Balance</span>
+            <span class="text-xs">🔍</span>
+          </div>
+          <div class="text-xs text-slate-500 mt-1">Query live balance from database</div>
+        </button>
+
+        <!-- Action 2: Deposit -->
+        <button onclick="openTransactionModal('DEPOSIT')" 
+                class="p-4 rounded-xl border border-slate-200 bg-white hover:border-emerald-500 hover:bg-emerald-50/50 text-left transition group">
+          <div class="text-sm font-bold text-emerald-700 group-hover:text-emerald-800 flex items-center justify-between">
+            <span>2. Deposit Cash</span>
+            <span class="text-xs">➕</span>
+          </div>
+          <div class="text-xs text-slate-500 mt-1">Add cash to account via atomic commit</div>
+        </button>
+
+        <!-- Action 3: Withdraw -->
+        <button onclick="openTransactionModal('WITHDRAWAL')" 
+                class="p-4 rounded-xl border border-slate-200 bg-white hover:border-amber-500 hover:bg-amber-50/50 text-left transition group">
+          <div class="text-sm font-bold text-amber-700 group-hover:text-amber-800 flex items-center justify-between">
+            <span>3. Withdraw Cash</span>
+            <span class="text-xs">💸</span>
+          </div>
+          <div class="text-xs text-slate-500 mt-1">Dispenser with overdraft protection</div>
+        </button>
+
+        <!-- Action 4: History -->
+        <button onclick="openHistoryModal()" 
+                class="p-4 rounded-xl border border-slate-200 bg-white hover:border-indigo-500 hover:bg-indigo-50/50 text-left transition group">
+          <div class="text-sm font-bold text-indigo-700 group-hover:text-indigo-800 flex items-center justify-between">
+            <span>4. Mini Statement</span>
+            <span class="text-xs">📜</span>
+          </div>
+          <div class="text-xs text-slate-500 mt-1">Audit log table sorted newest first</div>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- MODAL: TRANSACTION (Deposit / Withdraw) -->
+    <div id="txModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div class="bg-white border border-slate-200 rounded-2xl max-w-sm w-full p-6 space-y-4 shadow-2xl">
+        <h3 id="modalTitle" class="text-base font-bold text-slate-900">Perform Transaction</h3>
+        
+        <div>
+          <label class="block text-xs font-semibold text-slate-600 mb-1">Enter Amount (₹)</label>
+          <div class="relative">
+            <span class="absolute left-3 top-2.5 text-sm text-slate-400">₹</span>
+            <input type="number" id="txAmountInput" step="0.01" min="1" placeholder="500.00"
+                   class="w-full pl-8 pr-4 py-2 text-sm rounded-lg border border-slate-300 bg-slate-50 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+          </div>
+          <p class="text-xs text-slate-400 mt-1">Max 2 decimal places (paise). Must be positive.</p>
+        </div>
+
+        <div id="modalError" class="hidden text-xs text-rose-600 bg-rose-50 border border-rose-200 p-2 rounded-lg text-center font-medium"></div>
+
+        <div class="flex gap-2 pt-2">
+          <button onclick="closeModal('txModal')" 
+                  class="flex-1 py-2 px-3 rounded-lg border border-slate-200 text-xs font-medium hover:bg-slate-100 text-slate-700 transition">
+            Cancel
+          </button>
+          <button id="modalConfirmBtn" onclick="confirmTransaction()" 
+                  class="flex-1 py-2 px-3 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-bold transition">
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: MINI STATEMENT -->
+    <div id="historyModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div class="bg-white border border-slate-200 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div>
+            <h3 class="text-base font-bold text-slate-800">Mini Statement - Audit Log</h3>
+            <p class="text-xs text-slate-500">Sorted newest first (JTable Replica)</p>
+          </div>
+          <button onclick="closeModal('historyModal')" class="text-slate-400 hover:text-slate-600 text-sm font-bold">✕</button>
+        </div>
+
+        <div class="overflow-x-auto max-h-60 overflow-y-auto rounded-lg border border-slate-200">
+          <table class="w-full text-xs text-left">
+            <thead class="bg-slate-50 border-b border-slate-200 font-bold text-slate-700">
+              <tr>
+                <th class="p-2.5 text-center">ID</th>
+                <th class="p-2.5">Date & Time</th>
+                <th class="p-2.5 text-center">Type</th>
+                <th class="p-2.5 text-right">Amount (₹)</th>
+              </tr>
+            </thead>
+            <tbody id="txHistoryTableBody" class="divide-y divide-slate-100 font-mono">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="flex justify-end pt-2">
+          <button onclick="closeModal('historyModal')" 
+                  class="py-1.5 px-4 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold transition">
+            Close Statement
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let balance = 5000.00;
+    let currentTxType = 'DEPOSIT';
+    let txHistory = [
+      { id: 1, type: 'DEPOSIT', amount: 5000.00, date: new Date().toLocaleString('en-IN') }
+    ];
+
+    function formatINR(val) {
+      return '₹' + Number(val).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function fillDemo() {
+      document.getElementById('accInput').value = '1001001';
+      document.getElementById('pinInput').value = '1234';
+      document.getElementById('loginError').classList.add('hidden');
+    }
+
+    function handleLogin() {
+      const acc = document.getElementById('accInput').value.trim();
+      const pin = document.getElementById('pinInput').value.trim();
+      const err = document.getElementById('loginError');
+
+      if (!acc) {
+        showError(err, 'Account Number cannot be blank.');
+        return;
+      }
+      if (!/^\d{4}$/.test(pin)) {
+        showError(err, 'PIN must be exactly 4 numeric digits.');
+        return;
+      }
+
+      if (acc !== '1001001' || pin !== '1234') {
+        showError(err, 'Invalid account number or incorrect PIN.');
+        return;
+      }
+
+      err.classList.add('hidden');
+      document.getElementById('loginView').classList.add('hidden');
+      document.getElementById('dashboardView').classList.remove('hidden');
+      updateBalanceUI();
+    }
+
+    function handleLogout() {
+      document.getElementById('dashboardView').classList.add('hidden');
+      document.getElementById('loginView').classList.remove('hidden');
+      document.getElementById('pinInput').value = '';
+    }
+
+    function updateBalanceUI() {
+      document.getElementById('balanceDisplay').innerText = formatINR(balance);
+    }
+
+    function checkBalanceModal() {
+      alert(`Account Holder: Demo Student\nAccount Number: 1001001\n\nAvailable Balance: ${formatINR(balance)}`);
+    }
+
+    function openTransactionModal(type) {
+      currentTxType = type;
+      const modal = document.getElementById('txModal');
+      const title = document.getElementById('modalTitle');
+      const confirmBtn = document.getElementById('modalConfirmBtn');
+      const err = document.getElementById('modalError');
+
+      err.classList.add('hidden');
+      document.getElementById('txAmountInput').value = '';
+
+      if (type === 'DEPOSIT') {
+        title.innerText = 'Deposit Cash (₹)';
+        confirmBtn.className = 'flex-1 py-2 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition';
+        confirmBtn.innerText = 'Confirm Deposit';
+      } else {
+        title.innerText = 'Withdraw Cash (₹)';
+        confirmBtn.className = 'flex-1 py-2 px-3 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition';
+        confirmBtn.innerText = 'Dispense Cash';
+      }
+
+      modal.classList.remove('hidden');
+    }
+
+    function confirmTransaction() {
+      const input = document.getElementById('txAmountInput').value.trim();
+      const err = document.getElementById('modalError');
+      const amt = parseFloat(input);
+
+      if (isNaN(amt) || amt <= 0) {
+        showError(err, 'Amount must be greater than zero.');
+        return;
+      }
+
+      if ((amt.toString().split('.')[1] || '').length > 2) {
+        showError(err, 'Amount cannot have more than 2 decimal places (paise).');
+        return;
+      }
+
+      if (currentTxType === 'WITHDRAWAL') {
+        if (amt > balance) {
+          showError(err, `Insufficient balance! Available: ${formatINR(balance)}, Requested: ${formatINR(amt)}`);
+          return;
+        }
+        balance -= amt;
+      } else {
+        balance += amt;
+      }
+
+      const newId = txHistory.length + 1;
+      txHistory.unshift({
+        id: newId,
+        type: currentTxType,
+        amount: amt,
+        date: new Date().toLocaleString('en-IN')
+      });
+
+      updateBalanceUI();
+      closeModal('txModal');
+      alert(`Transaction Successful!\n\nType: ${currentTxType}\nAmount: ${formatINR(amt)}\nUpdated Balance: ${formatINR(balance)}`);
+    }
+
+    function openHistoryModal() {
+      const tbody = document.getElementById('txHistoryTableBody');
+      tbody.innerHTML = '';
+
+      txHistory.forEach(tx => {
+        const isDep = tx.type === 'DEPOSIT';
+        const typeBadge = isDep 
+          ? `<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-100 text-emerald-700 border border-emerald-200">DEPOSIT</span>`
+          : `<span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-100 text-amber-700 border border-amber-200">WITHDRAWAL</span>`;
+
+        const row = `
+          <tr class="hover:bg-slate-50 transition">
+            <td class="p-2.5 text-center text-slate-500">#${tx.id}</td>
+            <td class="p-2.5 text-slate-700">${tx.date}</td>
+            <td class="p-2.5 text-center">${typeBadge}</td>
+            <td class="p-2.5 text-right font-bold ${isDep ? 'text-emerald-600' : 'text-amber-600'}">${formatINR(tx.amount)}</td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+
+      document.getElementById('historyModal').classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    function showError(el, msg) {
+      el.innerText = msg;
+      el.classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
