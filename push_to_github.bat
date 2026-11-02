@@ -5,7 +5,7 @@ echo Pushing ATM Simulation to GitHub:
 echo https://github.com/premtodkar05-cell/ATM-SIMULATION.git
 echo =========================================================
 
-set PATH=%LOCALAPPDATA%\Programs\Git\cmd;%PATH%
+set PATH=%LOCALAPPDATA%\Programs\Git\cmd;%LOCALAPPDATA%\Programs\Git\mingw64\bin;%PATH%
 
 cd /d "%~dp0"
 git push -u origin main
