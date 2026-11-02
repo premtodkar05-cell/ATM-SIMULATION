@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ATM Simulation System - BCA Major Project Report</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --primary: #1e3a8a;
+      --secondary: #0f172a;
+      --text: #1e293b;
+      --light-text: #64748b;
+      --border: #cbd5e1;
+      --bg: #ffffff;
+      --accent: #2563eb;
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 13.5pt;
+      line-height: 1.65;
+      color: var(--text);
+      background: #f1f5f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .report-container {
+      max-width: 820px;
+      margin: 30px auto;
+      background: var(--bg);
+      padding: 60px 70px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+    }
+
+    @media print {
+      body { background: white; }
+      .report-container {
+        margin: 0;
+        padding: 40px 45px;
+        box-shadow: none;
+        max-width: 100%;
+      }
+      .page-break { page-break-after: always; break-after: page; }
+      .no-print { display: none !important; }
+    }
+
+    .page-break { page-break-after: always; break-after: page; margin-bottom: 50px; }
+
+    /* Typography */
+    h1, h2, h3, h4, h5 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--secondary);
+      font-weight: 700;
+      line-height: 1.25;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    h1 { font-size: 24pt; color: var(--primary); text-align: center; }
+    h2 { font-size: 17pt; border-bottom: 2px solid var(--primary); padding-bottom: 6px; margin-top: 1.8em; }
+    h3 { font-size: 14pt; color: #1e40af; }
+    h4 { font-size: 12pt; font-weight: 600; }
+
+    p { margin: 0.8em 0; text-align: justify; }
+
+    /* Code & Mono */
+    code, pre {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 10.5pt;
+    }
+
+    code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #0f172a;
+      border: 1px solid #e2e8f0;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 16px 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      line-height: 1.45;
+    }
+
+    pre code {
+      background: transparent;
+      padding: 0;
+      color: inherit;
+      border: none;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 11pt;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #f8fafc;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) { background: #fafafa; }
+
+    /* Cover Page */
+    .cover-page {
+      text-align: center;
+      min-height: 900px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 0;
+    }
+
+    .college-header h3 { margin: 0; font-size: 15pt; color: #334155; }
+    .college-header h4 { margin: 4px 0; font-size: 13pt; color: #64748b; font-weight: normal; }
+
+    .project-title-box {
+      margin: 40px 0;
+      padding: 30px 20px;
+      border-top: 3px double var(--primary);
+      border-bottom: 3px double var(--primary);
+    }
+
+    .project-title-box h1 {
+      margin: 0 0 10px 0;
+      font-size: 26pt;
+      letter-spacing: 0.5px;
+    }
+
+    .project-title-box p {
+      text-align: center;
+      margin: 5px 0;
+      font-size: 14pt;
+      color: #475569;
+    }
+
+    .team-box {
+      text-align: left;
+      display: inline-block;
+      margin: 20px auto;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 12pt;
+    }
+
+    .signature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 50px;
+      text-align: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 11pt;
+    }
+
+    .sig-line {
+      border-top: 1px solid #475569;
+      margin-top: 50px;
+      padding-top: 8px;
+    }
+
+    .callout {
+      background: #eff6ff;
+      border-left: 4px solid var(--accent);
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 12pt;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .diagram-box {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 25px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5pt;
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.35;
+    }
+
+    .diagram-caption {
+      text-align: center;
+      font-style: italic;
+      color: #64748b;
+      font-size: 11pt;
+      margin-top: 8px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Print Button for User -->
+  <div class="no-print" style="position: fixed; top: 20px; right: 25px; z-index: 1000;">
+    <button onclick="window.print()" style="background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,0.4); display: flex; items-center; gap: 8px;">
+      🖨️ Print / Save as PDF
+    </button>
+  </div>
+
+  <div class="report-container">
+
+    <!-- =================================================================== -->
+    <!-- COVER PAGE -->
+    <!-- =================================================================== -->
+    <div class="cover-page page-break">
+      <div class="college-header">
+        <h2 style="margin: 0; font-size: 18pt; border: none; color: #0f172a;">JSPM’s Jayawant Institute of Management Studies (JIMS)</h2>
+        <h4>(Affiliated to Savitribai Phule Pune University)</h4>
+        <p style="text-align: center; margin: 4px 0; font-weight: bold; color: #1e3a8a;">T.Y.B.C.A. — Semester V | Academic Year: 2026 – 2027</p>
+        <p style="text-align: center; margin: 0; font-size: 12pt; color: #64748b;">Course: FP-301-MM — Major Project</p>
+      </div>
+
+      <div class="project-title-box">
+        <p style="font-size: 12pt; text-transform: uppercase; letter-spacing: 2px; color: #64748b; margin-bottom: 8px;">Project Report On</p>
+        <h1>ATM SIMULATION SYSTEM</h1>
+        <p><b>A Tiered Desktop (Java Swing + MySQL) &amp; Cloud-Ready Banking Simulation</b></p>
+      </div>
+
+      <div>
+        <p style="text-align: center; font-size: 12pt; margin-bottom: 12px;"><b>Submitted in partial fulfilment of the requirements for the Degree of</b><br>
+        <span style="font-size: 14pt; color: #1e3a8a; font-weight: bold;">Bachelor of Computer Applications (B.C.A.)</span></p>
+
+        <div style="display: flex; justify-content: space-around; text-align: left; margin: 25px 0;">
+          <div class="team-box">
+            <span style="color: #64748b; font-size: 11pt; font-weight: 600;">SUBMITTED BY:</span><br>
+            <b>1. PREM TODKAR</b><br>
+            <b>2. VIRAJ PIMPALE</b><br>
+            <b>3. SHAM LIPNE</b>
+          </div>
+          <div class="team-box">
+            <span style="color: #64748b; font-size: 11pt; font-weight: 600;">UNDER THE GUIDANCE OF:</span><br>
+            <b>[ Guide's Name ]</b><br>
+            <span>Department of Computer Applications</span><br>
+            <span>JSPM's JIMS, Pune</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid #cbd5e1; padding-top: 15px;">
+        <p style="text-align: center; margin: 0; font-size: 12pt; color: #475569;">
+          <b>DEPARTMENT OF COMPUTER APPLICATIONS</b><br>
+          JSPM’s Jayawant Institute of Management Studies, Tathawade, Pune – 411033
+        </p>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- DECLARATION -->
+    <!-- =================================================================== -->
+    <div class="page-break">
+      <h2>DECLARATION</h2>
+      <p>
+        We, <b>Prem Todkar</b>, <b>Viraj Pimpale</b>, and <b>Sham Lipne</b>, students of <b>T.Y.B.C.A. (Semester V)</b>, hereby declare that the project report entitled <b>“ATM Simulation System — A Tiered Desktop (Java Swing + MySQL) &amp; Cloud-Ready Banking Simulation”</b> is an authentic record of our own work, carried out by us under the guidance of <b>[ Guide's Name ]</b> and submitted in partial fulfilment of the requirements for the course <b>FP-301-MM — Project (Major Mandatory)</b>, during the academic year <b>2026–2027</b>.
+      </p>
+      <p>
+        We further declare that this report, or any part of it, has not been submitted previously by us or by anyone else for the award of any degree, diploma, associateship, or other similar title of this or any other university or institution.
+      </p>
+
+      <br>
+      <p>
+        <b>Place:</b> Pune, Maharashtra<br>
+        <b>Date:</b> ____________________
+      </p>
+
+      <br><br>
+      <div style="display: flex; justify-content: space-between; font-family: 'Plus Jakarta Sans', sans-serif;">
+        <div style="width: 30%; text-align: center;">
+          <div class="sig-line"><b>Prem Todkar</b></div>
+        </div>
+        <div style="width: 30%; text-align: center;">
+          <div class="sig-line"><b>Viraj Pimpale</b></div>
+        </div>
+        <div style="width: 30%; text-align: center;">
+          <div class="sig-line"><b>Sham Lipne</b></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- CERTIFICATE -->
+    <!-- =================================================================== -->
+    <div class="page-break">
+      <h2>CERTIFICATE</h2>
+      <p>
+        This is to certify that the project report entitled <b>“ATM SIMULATION SYSTEM”</b> submitted by:
+      </p>
+      <ul>
+        <li><b>Prem Todkar</b></li>
+        <li><b>Viraj Pimpale</b></li>
+        <li><b>Sham Lipne</b></li>
+      </ul>
+      <p>
+        is a bonafide work carried out by them under my guidance in partial fulfilment of the requirements for the award of the degree of <b>Bachelor of Computer Applications (B.C.A.)</b> of <b>Savitribai Phule Pune University</b> during the academic year <b>2026–2027</b>.
+      </p>
+      <p>
+        The project work has been examined and approved as satisfying the academic standards required for the course <b>FP-301-MM — Major Project</b>.
+      </p>
+
+      <br><br><br>
+      <div class="signature-grid">
+        <div>
+          <div class="sig-line">
+            <b>[ Guide's Name ]</b><br>
+            Project Guide<br>
+            Dept. of Computer Applications
+          </div>
+        </div>
+        <div>
+          <div class="sig-line">
+            <b>Head of Department</b><br>
+            Dept. of Computer Applications<br>
+            JSPM's JIMS, Pune
+          </div>
+        </div>
+      </div>
+
+      <br><br>
+      <div class="signature-grid">
+        <div>
+          <div class="sig-line">
+            <b>Internal Examiner</b>
+          </div>
+        </div>
+        <div>
+          <div class="sig-line">
+            <b>External Examiner</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- ACKNOWLEDGEMENT -->
+    <!-- =================================================================== -->
+    <div class="page-break">
+      <h2>ACKNOWLEDGEMENT</h2>
+      <p>
+        We would like to express our sincere gratitude to our project guide, <b>[ Guide's Name ]</b>, for the invaluable guidance, continuous encouragement, and technical suggestions provided throughout the development of this project, <b>ATM Simulation System</b>.
+      </p>
+      <p>
+        We are deeply thankful to our <b>Head of the Department</b> and all the esteemed faculty members of the <b>Department of Computer Applications</b> for providing the necessary laboratory infrastructure, software resources, and supportive academic environment that made this project possible.
+      </p>
+      <p>
+        We also convey our appreciation to the administrative and library staff of <b>JSPM’s Jayawant Institute of Management Studies (JIMS)</b> for their assistance.
+      </p>
+      <p>
+        Finally, we extend our heartfelt gratitude to our parents, family members, and classmates for their moral support, patience, and motivation throughout the duration of this academic endeavor.
+      </p>
+
+      <br>
+      <p style="text-align: right; font-family: 'Plus Jakarta Sans', sans-serif;">
+        <b>Prem Todkar</b><br>
+        <b>Viraj Pimpale</b><br>
+        <b>Sham Lipne</b><br>
+        <i>(T.Y.B.C.A. — Semester V)</i>
+      </p>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- ABSTRACT -->
+    <!-- =================================================================== -->
+    <div class="page-break">
+      <h2>ABSTRACT</h2>
+      <p>
+        The <b>ATM Simulation System</b> is a full-featured, secure, and robust software application engineered to simulate the operational workflows of an Automated Teller Machine (ATM) for academic demonstration and practical laboratory evaluation. Built on a tiered enterprise architecture, the application addresses critical software engineering challenges in financial computing, specifically: arbitrary-precision monetary calculations, atomicity in concurrent database transactions, SQL injection defense, and non-blocking asynchronous user interfaces.
+      </p>
+      <p>
+        The desktop edition is developed using <b>Java 17 (LTS)</b> and <b>Java Swing</b>, backed by <b>MySQL 8.4</b> via <b>Java Database Connectivity (JDBC)</b> and managed by <b>Apache Maven</b> for dependency lifecycle automation. To ensure uncompromising mathematical precision in accounting, all monetary computations use <code>java.math.BigDecimal</code>, eliminating standard binary floating-point round-off errors. Database updates are executed strictly with parameterized <code>PreparedStatement</code> queries and enforced using explicit <b>ACID transactions</b> (<code>setAutoCommit(false)</code>, <code>commit()</code>, and <code>rollback()</code>), guaranteeing that balance adjustments and audit logging execute as an indivisible unit of work. Furthermore, all database operations run off the Swing <b>Event Dispatch Thread (EDT)</b> using <code>SwingWorker</code> threads, keeping the graphical user interface fully responsive without screen freezing.
+      </p>
+      <p>
+        In addition to the desktop Java Swing application, an online cloud edition was engineered using <b>HTML5</b>, <b>Tailwind CSS</b>, and the <b>Web Audio API</b>, and deployed directly to <b>Vercel</b> with full browser persistence (<code>localStorage</code>) and a GitHub CI/CD integration. This dual-deployment strategy enables live, link-accessible examiner evaluations without requiring local database configuration. End-to-end functionality was verified across 12 rigorous system test cases covering valid authentication, wrong PIN rejection, atomic deposits, balance inquiries, overdraft blocking, mini-statement generation, and cross-restart persistence.
+      </p>
+      <p>
+        <b>Keywords:</b> ATM Simulation, Java Swing, JDBC, MySQL 8, ACID Transactions, BigDecimal, SwingWorker, Event Dispatch Thread, Vercel Deployment, Financial Software Engineering.
+      </p>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- TABLE OF CONTENTS -->
+    <!-- =================================================================== -->
+    <div class="page-break">
+      <h2>TABLE OF CONTENTS</h2>
+      <table style="border: none;">
+        <tr style="background: none; border-bottom: 1px solid #e2e8f0;">
+          <td style="border: none;"><b>Declaration</b></td>
+          <td style="border: none; text-align: right;">ii</td>
+        </tr>
+        <tr style="background: none; border-bottom: 1px solid #e2e8f0;">
+          <td style="border: none;"><b>Certificate</b></td>
+          <td style="border: none; text-align: right;">iii</td>
+        </tr>
+        <tr style="background: none; border-bottom: 1px solid #e2e8f0;">
+          <td style="border: none;"><b>Acknowledgement</b></td>
+          <td style="border: none; text-align: right;">iv</td>
+        </tr>
+        <tr style="background: none; border-bottom: 1px solid #e2e8f0;">
+          <td style="border: none;"><b>Abstract</b></td>
+          <td style="border: none; text-align: right;">v</td>
+        </tr>
+        <tr style="background: none; border-bottom: 1px solid #e2e8f0;">
+          <td style="border: none;"><b>List of Figures &amp; Tables</b></td>
+          <td style="border: none; text-align: right;">vii</td>
+        </tr>
+        <tr style="background: none; border-bottom: 2px solid #1e3a8a;">
+          <td style="border: none;" colspan="2"><br><b>CHAPTER 1: INTRODUCTION</b></td>
+        </tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">1.1 Problem Statement</td><td style="border: none; text-align: right;">1</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">1.2 Objectives</td><td style="border: none; text-align: right;">2</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">1.3 Scope of the Project</td><td style="border: none; text-align: right;">2</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">1.4 Functional Modules</td><td style="border: none; text-align: right;">3</td></tr>
+        <tr style="background: none; border-bottom: 2px solid #1e3a8a;">
+          <td style="border: none;" colspan="2"><br><b>CHAPTER 2: SYSTEM DESIGN &amp; ARCHITECTURE</b></td>
+        </tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">2.1 System Architecture (Layered 3-Tier)</td><td style="border: none; text-align: right;">4</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">2.2 UML Diagrams (Use Case, Class, Sequence)</td><td style="border: none; text-align: right;">5</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">2.3 Database Design &amp; Schema</td><td style="border: none; text-align: right;">8</td></tr>
+        <tr style="background: none; border-bottom: 2px solid #1e3a8a;">
+          <td style="border: none;" colspan="2"><br><b>CHAPTER 3: IMPLEMENTATION DETAILS</b></td>
+        </tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">3.1 Technology Stack</td><td style="border: none; text-align: right;">9</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">3.2 Backend &amp; Data Access Layer (JDBC &amp; Service)</td><td style="border: none; text-align: right;">10</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">3.3 Graphical User Interface (Swing &amp; SwingWorker)</td><td style="border: none; text-align: right;">12</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">3.4 Cloud Web Edition &amp; Vercel Deployment</td><td style="border: none; text-align: right;">13</td></tr>
+        <tr style="background: none; border-bottom: 2px solid #1e3a8a;">
+          <td style="border: none;" colspan="2"><br><b>CHAPTER 4: SOFTWARE TESTING &amp; RESULTS</b></td>
+        </tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">4.1 Test Cases &amp; Execution Matrix</td><td style="border: none; text-align: right;">14</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">4.2 Defect Tracking &amp; Resolution</td><td style="border: none; text-align: right;">16</td></tr>
+        <tr style="background: none; border-bottom: 2px solid #1e3a8a;">
+          <td style="border: none;" colspan="2"><br><b>CHAPTER 5: USER MANUAL &amp; SCREEN LAYOUTS</b></td>
+        </tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">5.1 Input Screens (Authentication &amp; Transactions)</td><td style="border: none; text-align: right;">17</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">5.2 Output Reports (Mini-Statement &amp; Receipt)</td><td style="border: none; text-align: right;">18</td></tr>
+        <tr style="background: none; border-bottom: 2px solid #1e3a8a;">
+          <td style="border: none;" colspan="2"><br><b>CHAPTER 6: CONCLUSION &amp; FUTURE SCOPE</b></td>
+        </tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">6.1 Project Summary</td><td style="border: none; text-align: right;">19</td></tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">6.2 Limitations &amp; Future Scope</td><td style="border: none; text-align: right;">19</td></tr>
+        <tr style="background: none; border-bottom: 2px solid #1e3a8a;">
+          <td style="border: none;" colspan="2"><br><b>REFERENCES &amp; VIVA QUESTIONS</b></td>
+        </tr>
+        <tr style="background: none;"><td style="border: none; padding-left: 20px;">References &amp; Viva Q&amp;A Guide</td><td style="border: none; text-align: right;">20</td></tr>
+      </table>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- CHAPTER 1: INTRODUCTION -->
+    <!-- =================================================================== -->
+    <div class="page-break">
+      <h2>CHAPTER 1: INTRODUCTION</h2>
+      <p>
+        The Automated Teller Machine (ATM) is one of the most widely deployed computerized transaction devices globally, serving as the frontline digital interface between commercial banking institutions and cardholders. As modern software systems transition toward distributed cloud architectures, understanding the engineering fundamentals behind reliable transactional processing — including data consistency, cryptographic parameterization, concurrency isolation, and client-side threading — is a cornerstone of computer science education.
+      </p>
+      <p>
+        The <b>ATM Simulation System</b> is an educational, production-grade practical project developed for the <b>Bachelor of Computer Applications (B.C.A.)</b> curriculum. It faithfully simulates real-world banking operations, including account authentication, real-time balance inquiries, cash deposits, cash withdrawals with overdraft prevention, transaction audit logging, and receipt generation. The software operates entirely on <b>simulated virtual currency</b> and an isolated demonstration database (<code>atm_db</code>), ensuring complete safety while preserving the exact technical rigor required in mission-critical commercial banking systems.
+      </p>
+
+      <h3>1.1 Problem Statement</h3>
+      <p>In academic environments, practical projects simulating banking systems often suffer from significant software design flaws:</p>
+      <ol>
+        <li><b>IEEE 754 Floating-Point Inaccuracy:</b> Many student applications implement currency using binary floating-point types (<code>float</code> or <code>double</code>). Because binary fractions cannot represent fractional decimal rupees and paise precisely, cumulative round-off errors occur (e.g., <code>5000.00 - 1500.10 = 3499.8999999999996</code>), causing balance reconciliation failures.</li>
+        <li><b>Lack of ACID Transaction Guarantees:</b> A typical student application issues distinct, uncoordinated SQL queries for updating account balances and inserting transaction audit records. If an exception strikes between these statements, money is deducted without an audit log or credited without a balance update, violating <b>Atomicity</b>.</li>
+        <li><b>Vulnerability to SQL Injection Attacks:</b> Direct string concatenation in dynamic SQL statements allows malicious input (such as <code>' OR '1'='1</code>) to bypass authentication or drop database tables.</li>
+        <li><b>GUI Thread Starvation (Freezing):</b> In desktop toolkits such as Java Swing, running blocking network/database calls directly on the single <b>Event Dispatch Thread (EDT)</b> freezes the user interface, producing a "Not Responding" state.</li>
+        <li><b>Deployment &amp; Portability Barriers:</b> Traditional desktop Java applications require examiners to manually install JDKs, configure local MySQL servers, and import SQL dumps. Without an instant cloud deployment, remote evaluation during project vivas becomes difficult.</li>
+      </ol>
+
+      <h3>1.2 Objectives</h3>
+      <ul>
+        <li><b>Design &amp; Develop a Tiered Java Desktop Application:</b> Construct a clean, maintainable desktop application using Java 17 and Swing following the Model-View-Controller (MVC) paradigm.</li>
+        <li><b>Implement Robust ACID Transactions:</b> Guarantee that account balance modifications and transaction history logging execute within a single atomic database transaction using <code>connection.setAutoCommit(false)</code>, <code>commit()</code>, and <code>rollback()</code>.</li>
+        <li><b>Enforce Exact Monetary Math:</b> Utilize <code>java.math.BigDecimal</code> throughout the service and data layers to guarantee zero floating-point precision loss.</li>
+        <li><b>Defend Against SQL Injections:</b> Employ parameterized JDBC <code>PreparedStatement</code> instances exclusively for all SQL interactions.</li>
+        <li><b>Ensure Responsive GUI Threading:</b> Decouple database network access from UI rendering by running all database logic off the EDT using <code>javax.swing.SwingWorker</code>.</li>
+        <li><b>Implement Row-Level Pessimistic Locking:</b> Safeguard against race conditions during withdrawals using MySQL's <code>SELECT ... FOR UPDATE</code> syntax.</li>
+        <li><b>Provide Dual Cloud Accessibility:</b> Build and deploy an interactive web edition of the ATM Simulation to <b>Vercel</b> with full browser persistence and Web Audio feedback, enabling instant online review via GitHub CI/CD.</li>
+      </ul>
+
+      <h3>1.3 Scope of the Project</h3>
+      <p>
+        The scope covers the end-to-end user journey of an ATM cardholder: card credential validation via 4-digit PIN; balance inquiry; atomic cash deposit; cash withdrawal with insufficient balance protection; transaction audit logging; and receipt printing.
+      </p>
+
+      <h3>1.4 Functional Modules</h3>
+      <ul>
+        <li><b>Authentication Module:</b> Validates account number format and 4-digit PIN; manages active user session state.</li>
+        <li><b>Account Balance Module:</b> Queries the live ledger balance and displays it formatted in Indian Rupees (<code>₹#,##0.00</code>).</li>
+        <li><b>Deposit Module:</b> Validates positive amounts up to 2 decimal places and credits account balance with an atomic transaction log.</li>
+        <li><b>Withdrawal &amp; Overdraft Protection Module:</b> Evaluates available funds, locks the row, executes debit, and dispenses virtual cash.</li>
+        <li><b>Mini-Statement &amp; Audit Module:</b> Renders an interactive table displaying transaction ID, date, type, and amount.</li>
+        <li><b>Database Connection Module (<code>DBConnection</code>):</b> Manages JDBC connections, driver auto-registration, and error diagnostics.</li>
+        <li><b>Cloud Web Edition Module:</b> Delivers an interactive web-based kiosk simulator deployed on Vercel with Web Audio sound synthesis and <code>localStorage</code> persistence.</li>
+      </ul>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- CHAPTER 2: DESIGN & ARCHITECTURE -->
+    <!-- =================================================================== -->
+    <div class="page-break">
+      <h2>CHAPTER 2: SYSTEM DESIGN &amp; ARCHITECTURE</h2>
+
+      <h3>2.1 System Architecture (Layered 3-Tier)</h3>
+      <p>
+        The system implements a classic 3-Tier enterprise architecture:
+      </p>
+      <div class="diagram-box">
++-------------------------------------------------------------------------+
+|                        TIER 1: PRESENTATION LAYER                       |
+|                                                                         |
+|   +---------------------------------+  +----------------------------+   |
+|   |        Java Swing Desktop       |  |      Cloud Web Edition     |   |
+|   |  - ATMGUI (CardLayout)          |  |  - HTML5 & Tailwind CSS    |   |
+|   |  - SwingWorker Asynchronous EDT |  |  - Web Audio Synthesizer   |   |
+|   |  - JTable Mini-Statement        |  |  - Vercel Serverless Host  |   |
+|   +---------------------------------+  +----------------------------+   |
++------------------------------------+------------------------------------+
+                                     |
+                                     v
++-------------------------------------------------------------------------+
+|                       TIER 2: BUSINESS LOGIC LAYER                      |
+|                                                                         |
+|   +-----------------------------------------------------------------+   |
+|   |                     ATMService (Service Engine)                 |   |
+|   |  - Input Format Validation (Account No & 4-digit PIN)           |   |
+|   |  - Arbitrary-Precision Financial Math (BigDecimal)              |   |
+|   |  - Transaction Management (setAutoCommit(false), commit)        |   |
+|   |  - Overdraft & Insufficient Balance Detection                   |   |
+|   |  - Pessimistic Row Locking (SELECT ... FOR UPDATE)              |   |
+|   +-----------------------------------------------------------------+   |
++------------------------------------+------------------------------------+
+                                     |
+                                     v
++-------------------------------------------------------------------------+
+|                  TIER 3: DATA ACCESS & STORAGE LAYER                    |
+|                                                                         |
+|   +----------------------------------+  +---------------------------+   |
+|   |         DBConnection             |  |      MySQL 8.4 RDBMS      |   |
+|   |  - JDBC DriverManager            |  |  - Database: atm_db       |   |
+|   |  - MySQL Connector/J Driver      |  |  - Table: accounts        |   |
+|   |  - PreparedStatement Only        |  |  - Table: transactions    |   |
+|   +----------------------------------+  +---------------------------+   |
++-------------------------------------------------------------------------+
+      </div>
+      <div class="diagram-caption">Figure 2.1 — Layered 3-Tier Architecture of the ATM Simulation System</div>
+
+      <h3>2.2 UML Diagrams</h3>
+      <h4>2.2.1 Use Case Diagram</h4>
+      <div class="diagram-box">
+       +---------------------------------------------------------+
+       |               ATM Simulation System Boundary            |
+       |                                                         |
+       |   (( 1. Authenticate with Account & PIN ))              |
+       |                   ^                                     |
+       |                   | <<include>>                         |
+       |   (( 2. Check Account Balance ))                        |
+       |                                                         |
+       |   (( 3. Deposit Cash ))                                 |
+ [o]   |                   ^                                     |
+/ | \  |                   | <<include>>                         |
+ / \   |   (( 4. Withdraw Cash )) ---> (( Validate Balance ))    |
+User   |                                                         |
+       |   (( 5. View Mini-Statement ))                          |
+       |                                                         |
+       |   (( 6. Print Thermal Receipt ))                        |
+       |                                                         |
+       |   (( 7. Logout & Eject Session ))                       |
+       +---------------------------------------------------------+
+      </div>
+      <div class="diagram-caption">Figure 2.2 — UML Use Case Diagram of the ATM Simulation System</div>
+
+      <h4>2.2.2 Sequence Diagram (Cash Withdrawal)</h4>
+      <div class="diagram-box">
+Cardholder       ATMGUI       SwingWorker       ATMService     DBConnection       MySQL DB
+    |              |               |                |               |                |
+    |-- Enter Amt->|               |                |               |                |
+    |   & Click    |-- execute() ->|                |               |                |
+    |              |               |-- withdraw() ->|               |                |
+    |              |               |                |-- getConn() ->|                |
+    |              |               |                |               |-- Connect ---->|
+    |              |               |                |-- setAutoCommit(false) ------->|
+    |              |               |                |-- SELECT ... FOR UPDATE ------>|
+    |              |               |                |<-- Current Balance ------------|
+    |              |               |                |-- [Validate: Bal >= Amt]       |
+    |              |               |                |-- UPDATE accounts SET bal ---->|
+    |              |               |                |-- INSERT INTO transactions --->|
+    |              |               |                |-- commit() ------------------->|
+    |              |               |<-- Return Bal -|                                |
+    |              |<-- done() ----|                                                 |
+    |<-- Dispense -|                                                                 |
+    |    & Update  |                                                                 |
+      </div>
+      <div class="diagram-caption">Figure 2.3 — UML Sequence Diagram for Transactional Cash Withdrawal</div>
+
+      <h3>2.3 Database Design &amp; Schema</h3>
+      <p>The relational database <code>atm_db</code> consists of two normalized tables managed by the MySQL InnoDB engine:</p>
+
+      <h4>Table 2.1: Schema of <code>accounts</code> Table</h4>
+      <table>
+        <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr>
+        <tr><td><code>account_number</code></td><td><code>VARCHAR(20)</code></td><td><code>PRIMARY KEY</code></td><td>Unique customer bank account number</td></tr>
+        <tr><td><code>holder_name</code></td><td><code>VARCHAR(100)</code></td><td><code>NOT NULL</code></td><td>Full name of account holder</td></tr>
+        <tr><td><code>pin</code></td><td><code>VARCHAR(100)</code></td><td><code>NOT NULL</code></td><td>4-digit security PIN</td></tr>
+        <tr><td><code>balance</code></td><td><code>DECIMAL(12, 2)</code></td><td><code>NOT NULL DEFAULT 0.00</code></td><td>Account balance with 2 decimal places</td></tr>
+      </table>
+
+      <h4>Table 2.2: Schema of <code>transactions</code> Table</h4>
+      <table>
+        <tr><th>Column Name</th><th>Data Type</th><th>Constraints</th><th>Description</th></tr>
+        <tr><td><code>transaction_id</code></td><td><code>INT</code></td><td><code>AUTO_INCREMENT, PK</code></td><td>Unique audit transaction reference ID</td></tr>
+        <tr><td><code>account_number</code></td><td><code>VARCHAR(20)</code></td><td><code>NOT NULL, FK</code></td><td>References <code>accounts(account_number)</code> ON DELETE CASCADE</td></tr>
+        <tr><td><code>transaction_type</code></td><td><code>VARCHAR(20)</code></td><td><code>NOT NULL</code></td><td>Transaction type: <code>DEPOSIT</code> or <code>WITHDRAWAL</code></td></tr>
+        <tr><td><code>amount</code></td><td><code>DECIMAL(12, 2)</code></td><td><code>NOT NULL</code></td><td>Exact transaction value in ₹</td></tr>
+        <tr><td><code>transaction_date</code></td><td><code>TIMESTAMP</code></td><td><code>DEFAULT CURRENT_TIMESTAMP</code></td><td>System timestamp of execution</td></tr>
+      </table>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- CHAPTER 3: IMPLEMENTATION -->
+    <!-- =================================================================== -->
+    <div class="page-break">
+      <h2>CHAPTER 3: IMPLEMENTATION DETAILS</h2>
+
+      <h3>3.1 Technology Stack Summary</h3>
+      <table>
+        <tr><th>Layer / Tool</th><th>Technology / Version</th><th>Role in Project</th></tr>
+        <tr><td><b>Programming Language</b></td><td>Java SE 17 (LTS)</td><td>Core object-oriented backend programming</td></tr>
+        <tr><td><b>GUI Framework</b></td><td>Java Swing (<code>javax.swing.*</code>)</td><td>Cross-platform desktop interface</td></tr>
+        <tr><td><b>Database Engine</b></td><td>MySQL Server 8.4 Community</td><td>Persistent relational database storage</td></tr>
+        <tr><td><b>Data Connector</b></td><td>MySQL Connector/J 8.3.0</td><td>Official JDBC Type-4 driver</td></tr>
+        <tr><td><b>Build Tool</b></td><td>Apache Maven 3.9.9</td><td>Automated compilation and dependency lifecycle</td></tr>
+        <tr><td><b>Web Edition</b></td><td>HTML5, Tailwind CSS, JS</td><td>Cloud online kiosk simulator</td></tr>
+        <tr><td><b>Audio Synthesizer</b></td><td>Web Audio API</td><td>Procedural hardware key and cash sounds</td></tr>
+        <tr><td><b>Cloud Hosting</b></td><td>Vercel Serverless Platform</td><td>Live web URL for online viva grading</td></tr>
+      </table>
+
+      <h3>3.2 Backend Code: Atomic Withdrawal Implementation</h3>
+      <p>Below is the core transactional logic from <code>ATMService.java</code> showing row-level locking, balance deduction, and commit/rollback:</p>
+
+      <pre><code>public BigDecimal withdraw(String accountNumber, BigDecimal amount)
+        throws ValidationException, InsufficientBalanceException, SQLException {
+    validateAmount(amount);
+
+    String lockSql = "SELECT balance FROM accounts WHERE account_number = ? FOR UPDATE";
+    String updateSql = "UPDATE accounts SET balance = balance - ? WHERE account_number = ?";
+    String insertSql = "INSERT INTO transactions (account_number, transaction_type, amount) VALUES (?, 'WITHDRAWAL', ?)";
+
+    Connection conn = null;
+    try {
+        conn = DBConnection.getConnection();
+        conn.setAutoCommit(false); // Begin explicit ACID transaction
+
+        // Step 1: Read and lock current balance
+        BigDecimal currentBalance;
+        try (PreparedStatement lockStmt = conn.prepareStatement(lockSql)) {
+            lockStmt.setString(1, accountNumber);
+            try (ResultSet rs = lockStmt.executeQuery()) {
+                if (!rs.next()) throw new SQLException("Account not found.");
+                currentBalance = rs.getBigDecimal("balance");
+            }
+        }
+
+        // Step 2: Validate sufficient balance
+        if (currentBalance.compareTo(amount) < 0) {
+            throw new InsufficientBalanceException("Insufficient balance! Available: ₹" + currentBalance);
+        }
+
+        // Step 3: Deduct balance
+        try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
+            updateStmt.setBigDecimal(1, amount);
+            updateStmt.setString(2, accountNumber);
+            updateStmt.executeUpdate();
+        }
+
+        // Step 4: Record audit log in transactions table
+        try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
+            insertStmt.setString(1, accountNumber);
+            insertStmt.setBigDecimal(2, amount);
+            insertStmt.executeUpdate();
+        }
+
+        conn.commit(); // Atomic commit of both updates
+        return currentBalance.subtract(amount);
+
+    } catch (SQLException | InsufficientBalanceException ex) {
+        if (conn != null) conn.rollback(); // Rollback on error
+        throw ex;
+    } finally {
+        if (conn != null) {
+            conn.setAutoCommit(true);
+            conn.close();
+        }
+    }
+}</code></pre>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- CHAPTER 4: TESTING -->
+    <!-- =================================================================== -->
+    <div class="page-break">
+      <h2>CHAPTER 4: SOFTWARE TESTING &amp; RESULTS</h2>
+
+      <h3>4.1 Test Cases &amp; Execution Matrix</h3>
+      <table>
+        <tr><th>Test ID</th><th>Module</th><th>Scenario Description</th><th>Input Test Data</th><th>Expected Result</th><th>Status</th></tr>
+        <tr><td><b>TC-01</b></td><td>Auth</td><td>Valid Login with Demo Account</td><td>Acc: <code>1001001</code>, PIN: <code>1234</code></td><td>Login successful; balance shows ₹5,000.00</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-02</b></td><td>Auth</td><td>Rejection of Invalid Account</td><td>Acc: <code>9999999</code>, PIN: <code>1234</code></td><td>Rejection dialog: "Account not found"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-03</b></td><td>Auth</td><td>Rejection of Incorrect PIN</td><td>Acc: <code>1001001</code>, PIN: <code>0000</code></td><td>Rejection dialog: "Incorrect PIN entered"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-04</b></td><td>Input</td><td>Validation of 4-digit numeric PIN</td><td>PIN: <code>12</code> or <code>ABCD</code></td><td>Blocked: "PIN must be exactly 4 numeric digits"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-05</b></td><td>Inquiry</td><td>Real-Time Balance Check</td><td>Click "Check Balance"</td><td>Shows current balance in ₹ dialog</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-06</b></td><td>Deposit</td><td>Valid Positive Cash Deposit</td><td>Amount: <code>₹1,500.50</code></td><td>Balance becomes ₹6,500.50; log created</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-07</b></td><td>Input</td><td>Negative Deposit Rejection</td><td>Amount: <code>-500.00</code></td><td>Rejected: "Amount must be greater than zero"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-08</b></td><td>Input</td><td>Excessive Decimals Rejection</td><td>Amount: <code>250.755</code></td><td>Rejected: "Cannot have more than 2 decimal places"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-09</b></td><td>Withdraw</td><td>Valid Cash Withdrawal</td><td>Amount: <code>₹2,000.00</code></td><td>Balance becomes ₹4,500.50; virtual cash dispensed</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-10</b></td><td>Withdraw</td><td>Overdraw Prevention</td><td>Amount: <code>₹50,000.00</code></td><td>Transaction blocked: "Insufficient balance!"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-11</b></td><td>Audit</td><td>Mini-Statement Audit Log</td><td>Click "Mini Statement"</td><td>Table renders all transactions newest first</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-12</b></td><td>Persist</td><td>Restart Persistence Check</td><td>Close app &amp; relaunch</td><td>Balance and logs persist from MySQL</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+      </table>
+
+      <h3>4.2 Defect Tracking &amp; Resolution</h3>
+      <p>Three primary software defects were detected and resolved during testing:</p>
+      <ol>
+        <li><b>Event Dispatch Thread Freezing:</b> Performing database queries synchronously inside action listeners caused temporary GUI freezes. <i>Solution:</i> Implemented <code>SwingWorker</code> threads for asynchronous background execution.</li>
+        <li><b>Floating-Point Precision Loss:</b> Initial test calculations using <code>double</code> created rounding anomalies (e.g. <code>.4999999</code>). <i>Solution:</i> Standardized all monetary figures on <code>java.math.BigDecimal</code>.</li>
+        <li><b>Withdrawal Race Conditions:</b> Simultaneous withdrawal requests could overdraw funds. <i>Solution:</i> Added MySQL pessimistic row locks (<code>SELECT ... FOR UPDATE</code>) within an isolated transaction.</li>
+      </ol>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- CHAPTER 5 & 6: USER MANUAL, CONCLUSION & REFERENCES -->
+    <!-- =================================================================== -->
+    <div class="page-break">
+      <h2>CHAPTER 5: USER MANUAL</h2>
+      <p>
+        The application is designed for intuitive use by cardholders:
+      </p>
+      <ul>
+        <li><b>Login Screen:</b> Cardholders enter their Account Number (e.g., <code>1001001</code>) and 4-Digit PIN (<code>1234</code>). A convenient <b>"Fill Demo Account"</b> button is provided for quick viva evaluation.</li>
+        <li><b>Dashboard Screen:</b> Displays a prominent current balance card formatted as <code>₹5,000.00</code>. Provides 4 large action tiles: Check Balance, Deposit Cash, Withdraw Cash, and Mini Statement.</li>
+        <li><b>Mini-Statement Window:</b> An interactive table displaying Transaction ID, Date &amp; Time, Type, and Amount in ₹, automatically sorted newest first.</li>
+        <li><b>Printable Slip:</b> An automated thermal receipt is generated displaying closing balance and transaction reference.</li>
+      </ul>
+
+      <h2>CHAPTER 6: CONCLUSION &amp; FUTURE SCOPE</h2>
+      <h3>6.1 Summary</h3>
+      <p>
+        The <b>ATM Simulation System</b> provides an authentic simulation of commercial ATM banking workflows. The system demonstrates mastery of core Java 17 features, Swing GUI multithreading, ACID transaction integrity in MySQL, and cloud web hosting on Vercel. All 12 test cases passed with 100% adherence to functional requirements.
+      </p>
+
+      <h3>6.2 Future Enhancements</h3>
+      <ul>
+        <li><b>Cardless Cash via Mobile OTP / UPI QR Code:</b> Enable dynamic QR code scanning using smartphone banking apps.</li>
+        <li><b>Biometric Authentication:</b> Integrate hardware fingerprint recognition for passwordless ATM access.</li>
+        <li><b>Multi-Currency Support:</b> Real-time foreign exchange conversions (USD, EUR, GBP) using financial APIs.</li>
+        <li><b>Hardware Security Module (HSM):</b> Upgrade from demo plain-text PINs to salted hashing (Argon2id) and HSM PIN translation.</li>
+      </ul>
+
+      <h2>REFERENCES &amp; VIVA QUESTIONS</h2>
+      <ol>
+        <li>Oracle Corporation: <i>Java SE 17 Platform Specification &amp; Documentation</i>.</li>
+        <li>Oracle Corporation: <i>MySQL 8.4 Reference Manual</i>.</li>
+        <li>Sun Microsystems: <i>Java Swing Architecture &amp; Event Dispatch Thread (EDT)</i>.</li>
+        <li>Vercel Inc.: <i>Vercel Cloud Deployment Platform Documentation</i>.</li>
+        <li>GitHub Repository: <code>https://github.com/premtodkar05-cell/ATM-SIMULATION.git</code>.</li>
+      </ol>
+
+      <div class="callout">
+        <b>Viva Question Quick-Tip:</b> When asked why <code>PreparedStatement</code> was used, emphasize both <b>SQL Injection Prevention</b> (parameterized literal values) and <b>Pre-compiled Query Optimization</b> in the database engine.
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
