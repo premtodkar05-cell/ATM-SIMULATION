@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -215,85 +215,112 @@
   <!-- Floating Print Button for User -->
   <div class="no-print" style="position: fixed; top: 20px; right: 25px; z-index: 1000;">
     <button onclick="window.print()" style="background: #2563eb; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,0.4); display: flex; items-center; gap: 8px;">
-      🖨️ Print / Save as PDF
+      ðŸ–¨ï¸ Print / Save as PDF
     </button>
   </div>
 
   <div class="report-container">
 
+        <!-- =================================================================== -->
+    <!-- COVER PAGE (ResumeForge Reference Design) -->
     <!-- =================================================================== -->
-    <!-- COVER PAGE -->
-    <!-- =================================================================== -->
-    <div class="cover-page page-break">
-      <div class="college-header">
-        <h2 style="margin: 0; font-size: 18pt; border: none; color: #0f172a;">JSPM’s Jayawant Institute of Management Studies (JIMS)</h2>
-        <h4>(Affiliated to Savitribai Phule Pune University)</h4>
-        <p style="text-align: center; margin: 4px 0; font-weight: bold; color: #1e3a8a;">T.Y.B.C.A. — Semester V | Academic Year: 2026 – 2027</p>
-        <p style="text-align: center; margin: 0; font-size: 12pt; color: #64748b;">Course: FP-301-MM — Major Project</p>
-      </div>
-
-      <div class="project-title-box">
-        <p style="font-size: 12pt; text-transform: uppercase; letter-spacing: 2px; color: #64748b; margin-bottom: 8px;">Project Report On</p>
-        <h1>ATM SIMULATION SYSTEM</h1>
-        <p><b>A Tiered Desktop (Java Swing + MySQL) &amp; Cloud-Ready Banking Simulation</b></p>
-      </div>
-
-      <div>
-        <p style="text-align: center; font-size: 12pt; margin-bottom: 12px;"><b>Submitted in partial fulfilment of the requirements for the Degree of</b><br>
-        <span style="font-size: 14pt; color: #1e3a8a; font-weight: bold;">Bachelor of Computer Applications (B.C.A.)</span></p>
-
-        <div style="display: flex; justify-content: space-around; text-align: left; margin: 25px 0;">
-          <div class="team-box">
-            <span style="color: #64748b; font-size: 11pt; font-weight: 600;">SUBMITTED BY:</span><br>
-            <b>1. PREM TODKAR</b><br>
-            <b>2. VIRAJ PIMPALE</b><br>
-            <b>3. SHAM LIPNE</b>
+    <div class="cover-page page-break" style="min-height: 940px; display: flex; flex-direction: column; justify-content: space-between; text-align: center; padding: 25px 10px 15px 10px; font-family: 'Calibri', 'Plus Jakarta Sans', sans-serif;">
+      
+      <!-- Top College Header with Logo -->
+      <div style="margin-bottom: 25px;">
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 12px;">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHsAAAByCAYAAABzyK63AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAgAElEQVR4nOy9d7xl51nf+33Larucffp0zYykkUaSVR0kYztGrtgWtsH2hMQxKWBMAF9uciG5mHCTIdwECBBayAUTG4LsIJAsS5YVCUvGki0bZHVbssqMps+Z08tuq70lf6x9zpwZdWkkcu/nPp/P+1lnn71Xe37red+nL5G3/+yvQ+f2W3jcx6OPLa7Ye+++uz+3Z88ey/9P/5+hvXv3apF1bnhA+XInwg7lIlVRVKfXcfORanwjTvR9UNzNnH6Qze/r/21f8Muh9uN3jqV1Li9Ss8MYtdm5+Cwp/Ba8iAEcvgtiRnhzwFh7vF6Pj4vG0sObN79v/m/72l823fUnMW/cvDtz8o3e5JdB/ubMJDuE9x6AxeM3bYuG/eukLC/XonklJr8S390kKBDeZtbrh2UU342N7z44dfSvdu36mfxv+ZaelVaO/uVoP/fXZHnnjShxdVKLdg01R1QcDSHlELjwOfc1ZUaa9el2F22Wdp9Em7saQfD1qAjuGLrgHQuv4W28JLrrrj+Jr7xy9DJh83eA/T6BvVJIOeScQni9JAj2GTH0zTWwT6e9e/fKT/zo5RuHJtyboP02LeybTOpepwmFJ8qdCP5K6uDOXlrcMjTx4f3wHAd6DWjp4K3bjQ0+lAr/gSCsvSmOhlUYJARRgtYaqQU4AUTg9XMcRVa/EQ4wIAxl3qMwXfr9FVsW/YcakbxuxZjrtm17+/HX8PaehYRot286L1a8SdjyfVL23yUENSs0DjkN6q+85RvKxw/d9JfZt1aX5OcE+1lp6pZxhuQ7cflbrSjf54XZKKRHabEvLcXtOhz5/De+MXPv1Vf/k+zVus1TLufo7R8rOyv/OJDhm2tD49SHNyHDIZRuABpnHN77AYAgCAD17AfzEhDV38ICFonBU+K8RZGxPHeQrDvnUlPeO75p4yebv/OVr7N3r3sNbhW4PizL2ht8sfjDqPztzprzXSnQ6DmlG3chozvLrv9KPPlDTz/XEV4a2KfQpwK6m88vg/77017+bin1G4JABwIWpQ6+rFVwHbPujjO/1guxeOLWd+el3utMcmWjPkqt0UQHDYSsgQ8Gv7NY1t+bRAg5APXZDruK2ape6pBQ4S8ESIvLe8hA4dIevXSZbnfmgaQh/9Xw+Nv+6sze44AWPjtURGPv9dK9T/js3db0R8NAFNbzcKji24mTL7L3vkfYu9e8mMO9ArBPp3tG6GbvRfR/2MnuO8HGpiw7UsS3aT30RZb8F14p8ItPf+l16Oz3O738LaNjO2g0z0bIJl558BohE/BUAPkCJ6gku4KtAvt5yQInBVUKCd5hbTVDeCHBWQIt8a5De3k/09P7vMQ9ODk6+VOtbT/wrVdyfwCs3DpC6N+PyD+Y5v13SxmEuLDthfxyLJMbaBdf4WUqj2cQ7JN09Oj1ybbh6F25an8Ia98PSQsR5QTyC6BuiJa+ezsbf673og/4+J+OLXr7Sx3Lj4toKNwwdi5RfRLKGI/GyQpYKQLwslp6pUeoSpKdc1g3mMqFWDus5zTwxUmgxels8RLvBZXEGxAFQvaQZPTTNp2l2aIRyt/qq4Vf3rjxR178vQG07xxDdt6TIz8K9q2IMvTOLgkV/Q/jg+vuu2/xzjOxNL4qYK+nu+7aG1955d99Jzb/YesW3hdqOxRJ2UGGN1Am115/W/G157Ppu4c+9ZF0sfvb/UJM1CbPpj68BSWGieJxXFGB42SBF24A9ABAKQYAeaxzuNPAdoLnntLXkVzHHiECwIGo1nLvS7R0SO0Qrsvy1OOEmqfC5saP1Mbf+sDzHnjf70acdd67yVf+IfTfVxgfOz00J4LaLV6o6+K/OfF1zrDu86qDfQotfHaIVvR28uKfYs17nQ+UV+GhUsc3FDGfGuIH9q399uj1yVK6/PtS2n+6sgxRbQMjk2ej4yZZalAqRolKs3bSsTr9uoHgrkqtdQ5rDc66U6TaveCUXj0YJ8E+/fcO7y1KDKRd5nizQHdlhjjURofRzzc2feu34DQFrrz+zZjaPyzz/h4lyjEpXYqVNxEk13LfylfPNMCn3M9rCvZ6euLmJtviPU6k/9jK9I1OGm1K7quH9b+g07u9t5L/0dzc0TekOYxMXkStsYUgbJHlHh0ElEVBvd7Ae1etxaIC05/EE+MszoKxFufsKWDDC0u3Ou2BEKKaLYSsjrP6IHjvERQo1aPIF1mcOUggSlTob5NjxZ6Nw+dstAEf9XbxH5XWnO3zWil846YkTr7Asadu5DXyWfztgb2Olpev2zE8zEds1vmokv4C+o7OYpfFxQ7N0S3o2jb6WUAcDYHXSFWBoJAIISoQhEMKcVKynac0JUVh8c4RBAFZdqrQrIJ9+kOwCqZi3fq+yicvkUohhEAhUKraXypLaTsEMsXlCyzNH0GKjLFNI52wXqsbpWUu7N1e1j4vY31dkz1zrw43n5v+lwB7ldpzv3le3l66X3jVbNbHUOEQTtTplzHGaZTUCAIEAdJL5MBmlgMBXA+atZaysPTTPqY0aw/IKlVza/U/eTrYg89CnpzGvZRIOVg2rEN4U1lkajDdKweioB55ApXjijY6NPS6S8gAZK2xJxr+ZzecWY69NPpfB+yjv3/u/MKxm9PCXLiSWzKv2bX7YrzUKARxEpJmGY4QXANpY6SPKjBkQQWfXFPKjLWk/Yw8z3HOoXWAMeXa6daD/QzJHnyWUpzUyoVGCIWUEiEtUlqkNCjlqs/KIXxOEocoKbFlQW9lkamjTzMUBYT15vHaxt2XNze99hK9Ss/lO3xNKdt/7bk2m/+qLcXW5aU+RtcZm9xCkSukFHgMfWMQ2qMowBeVLe1KnHDAYHr2McJpnHOYoiDtdfFeEEURST1mbq5z2pkHZtppYMtVpeu0NbswJVEUUG9oklgjpBuADVqCQOGdo9svyNOCWtSk2ZogdH0W5k5sMTK5s8n17+BvCfC/fck+en2yvHDo4U5n6rzcK3qZo9maZGLyLIKwRbuT0muntFpNZGjI8i5BGDDcGsZLi7E9StMDNJIW3aWCbrdPr5syMjLG8PAoeV5yYmZmYCefJHvavUtZmWlKSqIowNiCIAjw3lKaHKk8W7aOgyjQWhIogdIaZwR5keONQ0qNKTS9do8ohCBICaMeSuZIL9HU7sRvej/b9qSvIZeB/wUke355/reL7uJ5AL00J6wNM9waIQkS0qykPd9BELE8n6KDkqLMiWslkVbo2CEDSxxobOnIeissLC2SpjlJXGd65gizc9MIFNZ4rLN48SwKmZCAQyqJsw6rKj+6p6QsSqQShKGiOZSQRAId1PBYZmdmScIEHYRrTpe5uSUoQ1qtFlpZhLI41UcKg5aOMu2+I2jIXwX+99ea1+pf/8yVb1LJrqOv9YkBulOf+8jy/IH/0O3OE4QhhfE0hkYIgohOp0uv2yftZ2glsaYgzXKyLEUKTRSFdDs9pFRIFHleEEeaVitB4FhZWcLZklAHWFOSZV0QDu8s3pV4VwIG783gswFvcTYHSqQsSdNlanXF5GSLLVs3UE9qaBlSZI6Z40ukfUOgIiQS7ywCRxREJEm9irYJC6LEk4HPCZTHlCle+qtUuv8w9Ssefi35rf7NL77zgCyP9vgPf3YvV1/9ms3p7bnrzpuZevKWtDsbSu9xzrO40qU+NIJSmn4/JcsKarWYLE9RStDPUowtCcOAWq1OUkvwFmanZ3hq3z56nQ5RHDI6OsLGDRsIQkVW9OinbYKg0tql8EjpqiHWDWmQosSTo2RJoD1nn72NLZs30GjEOFOS9jPSfkaZe+bnljClo9UYIgwkxmQoCX6g+ulAYE2Kp8BjEL4Em6IC8AK8km+dPfHoLY3R179m67f6d7/4Q28H93HesPUi8mN/RXT2a7CWXK+OHzh+U3vx0LnW9EiimBMn5gjjJmOjk+AEURgxMjbCysoS/X6bbreL1OC9Y2xslEazRpHn2NIwNT1N2stQMmJqap6ZmVmKImfL5gk2nbWBJHSUZYeV5aVKO7cl1haYMsPaAmtyrOuC6DA2HnHOOVvZuGEMawyHDx3h0IFD1OImM9NT1OKYQGlw0Ot0SPsrBNpjipQoquxvKRzeFUAJopJ4LRxSFCAsTlisc3F9qPY96tdu/WOuvvo1CZOq933wPZ+bHKl7r8qPlSL7aNbf91AY7z70ap50bv+3PzZ17NGfroWWlcVZgjAhzz1DQ+PEUY1Gs47SCmMNQ0M10rSHtTm9focg0oyMNJESrDVMT59gbnYWD+SZwRqHMSX9rMfxY0dIe8u0huts27WTjRPj9NMVoCDPVihNF2N7NJshW7dOsmvXdjZsmkQBRw4f4YnHnyTt9Em7BbPTM7QadWyZIxAcPfw0/e4ycawZHRlGDNZ8MDhfuVKdN0hAOlGBLguQtgrKSYE35RbzPZu6QeP133w1+c3Sna08PfxH6g//8BYnowvvavefvEcr96FAu09Y+0Ty8CP33L158+vP+BM3f+TmzYFdvCGOXe3oof0449iyZTvz88toXWe4NcLyyjIHDx5gfHSYtN+lVouYn59GSEfa7xAGgigKUcpz8MDTIKDf7WFKi1aaQCmEF2RZysLCIgtziyzPzxNElu07NrBp4zCOFEHGrl3bOOfcLQwPNyhzz+zUHDPTC9SiOnOzS3jjCHSAACbGx5mZPk6armBMnyLvsOv8nThr0EGIx+G9ww223ntwHu+qNT0IS6owagAedOBR0r9Rdh//NI0rXlqk7MVS59a3oMyXpQ/eovbu3QtAHF94aH7xqc/WouQCIbIfHR0N39/p7rsnSS6YPZPndnP3/d53vvPXbxRkNBo1FhfnqcV1jh+bZnh4EqkUR44dJqmFjI62aHdXOHDwAHmesry0TK/foywN8wuznJiawtqSssgQAvCGMJDgS/K8i7MlOEsYapZXFjh+/Gnm508wPjnC5u1b2bJtM83RBotzJ3jowQdoDY0yP7+EEIKJ8UkUmoWFRZKkxtatWxlq1UmSkDCWDI80GR0dIdABYRjj8VhfVgB7C36gDHrAg/clYVgpbCAROPKijy2zMIyTJrWrvnQm+fzAA58KJoeO/jtJ/l9xIhei/uFntbPT9NYfkbr7O3m/rCdh/ZeD7879Gq//ePksx3xpdOTmzbmZP9jNpsNGU3Pk8H4effRRtm3dyfazdlOWIbOz8ywvz7N162YmN4wzP7/IgaePsbLcozAOpQK890xMjAGOXq+NkHYQyjTUahHgMMbifImUCq0F/bTH9rPPYuvWzUyMT9Btt1lYXGTTxkm0lMzNLXDg6aN02ikXXvg6mo0R2it9FheX2bJ5e+WDlxbEIClkNfbtJX69Y2bwf++rqK13Ay+czKg3cpDr8zcczkIU1cpOtunK4R0/fUa08273hkuCwFyrpb/EZPx55vRPtVp7Fp/TqbK8fNOOeuz+i/fFe6TjXq1H/gnR9z/xSi5i4duf+QOlFn8iSizTM0eYmZuizA2vf/1VZH148OEn0CpEyJKizKjXYqSMmDmxQp5ZytIT6AghPbVmglSeKFIsr8xVEhzpaq10pgpUaIUUgs1bNrHz7LMZGh1hYXaW48ePc+TIEYQQBEHA9m1bOe+8XeAV0zOzHDl8DGclzcYIZ207GyEUQRDQT9unJDis0ppHdS0e6sBVf6/xV2bU6znIk8EY6avvpZQ4velz0caf++gr4e/111+vfug98t9asp83XixJH/6rZOjD/231+xfwoAmRZTd/whXdf++dUDqp/cdf+ZWHfnnvy0iym529daOcPXi4s3w8bHen2bFzK0EoqNUa2FLx4AOP0u958jxn6/YNSOU4cuQIw8PjHHz6GEUuEAQESpHUYowryYuUIBAMjzQo8x5xEtLtdTBlSZIkbN26lYsuuggRRUwdPcL+fQfodDtIIeh0utQbdcqiQAhJkiRMTExw0UUXETZblN0+WVoQ6AjrPNZYjC0Gd3Pq7Xt5amKE9A7n/RqY1T8zkkYJYh3Yg621DhWNGxttPCcZ+fiRl8pbgKL351eYIvt0pMPLlA7uXF7RPz688QcPrf/Ni3KXpumdZylTfEYG2dutsA9nmft4q/XD972Ui+nP/dm/iEz2nzBdVOzAVSFcUzq+eNOXmZ1Z5NxzdzM6Osa5u7eRFz2mpqYYG93AN+95kDy3BCJCyoBGI6HTXcH4AiUsQlqGmnUajRreGyYmJjjnnHMIo4iF+QUef/xxet0+eZ5TGsPExDjLS21Ka1FaoZRGKEme5wRBwMaNmzn//PNpjU3g8pxOp4sONHm+GnZ+lmd9EGJdJectwvmTYIuCWrNKZ1qlVbC983jZQNa3/GY48lM/91L4etdde+M3X3nev9GSf4nVXVz48zR/8A+f7bcv3jcuhCi6t/9TITq/jhBDXqj/0ul1/6+xsY+2X3jnvbJc3P6YyLPdyhfVDQ+mw//xpTs5fGgWJUMmJia44vWXUKvrKvVHgDGCfrfkiccP0u9kJEmNbncFqSonifMFWjo2bppgcnyUc889FxlI5k9Mc+zoFO12m3a7jfMeoTRhWBUJFEWBViHGGGSgieIao2OjFEVJWRQorbjiiiuI6wloDc7RXlgkz3MOHTrMpk2baTTqWGOJ4iqjVUrJ8vIytXoMVKHQk/wraA75U8D23q/NBsYHiGhkOs7OPftF+817N19D4H8TU5yfZfbmOGt87PmSEV+8b9x7H8JnOp3rb6np8Pedz38mSfjAysqN/6zV+uDtz7tv+earkId3V8qNWwP6xNQMhw4fwpmYrMxotTKmZ46za9dZxElEL+sThiGphM1bJjn89FH6/Q5p1icIJAhDvR5x7jlnc+mlrwMcB/c9xYH9T2NMThzXwTkaSYAX4JwnDMXgxgXWFjhhkDgEITt37lxLhvDeUpQpMwePcuzYES677AqGJkYouynnnLOdR779CGOjY0xMTMAgPUppRRBWfnbvPd6vB/uZaXbrffRSWGzZ3thJFt7VhJufj53t9p+O1YL6v7fOftx0xGxdtX4oHn33zS9UqPGSAyHN5p454O+VK9e9S2k+E4fpbfRu+Dwy+VmSaw4/2z5FUfwI3iMFCHyVhz24WSUDCuvpdPogxjjrrC1Yn9NLe1jjMaZgfm6eZn0UGQg6y8sEStIcqnPu2TvZfcG5BLHkyccf5diBp0l7fcChlSLtLyE9OO/xolobrQkG11QSBBLhLMIphBOUZY7UMYECqQQzM8c4euwgC4tzzHz5OJdcchmbNm5hdNMkb26+kXu+cQ86FIyNDRNFEUWREQYh1paD7Jn1vHeDDJiT/1s/q0rAmQLp0h/lucDeu1fy81d8rC7Ur+Rpt6Xl6B/UdfiLtL5/EV54hn5FIc7p6d+ojzd2/oJU6b8sjUsLqX9jeTH4jW2nTUPp0hcOaje/Q5oMRU615jms9ZgSlhczHnzwQc7asZGJyRZCWtrtZRbml3j88X1871XfhzGCRx97kl6/xyUXXcjFF11AmGiOHNjHk089ztLiLHWlSHt9ms36ICdtfWpolaN2chqvFKXSFZUjJhnmyje9l9IpvK2yRx9+5H7yPGVubgaADRu2sLy8zOZNW7n44osZ3riB/tICZVly1113sWHDRs7ato0grMxDJddVn4iC1rB6xjR+8oMEEeDUhk70+MTk6YmHS8euvbTeLP9LGIo3IpNHsNHHqf3QS8pTPyPx7MXuFy+Ko+x3IH87Xh0onfzJVvz3vwzQPXr3xWFt/tvSLSNcH0mOGICNVOA9tsi4//57ueDCXQBkWUaelezbf4DF+RWUqnFieoFLL7+USy+7hEYt5vDBAzz84P0EyrO8uEAtDFDeEeCJooAw1PTT7mDJcOhBXlmjViMrciwWpMAJR1rkSN0kbG7jrO3ns7CwSFlmtNttdCAJggApJUoGLK+sEASSDRs24r1jy5YtbNixk6Wp4zz6nUfZdd4ugqAy1cqypN/v02g0kMpRS9wgq+ZUWpvspcC4FtZvf//Qlo/dAsD0jZNFUnzSiv4nZC3MrNGf/I+/+sQf7H2RVSDr6YwmL/TN5z9UFt3fDES5vSZrt3eXGj+XaPUDiO6vetcdgF0iqNbuIs0wLqdWC7CuwNqCXi9jealDHNeZmZpjZblHnDS57LLLCJOYffue5NsPP0ivs0KoBbUwwFtDgEc6ixQnwc6LXqUle1cpdB5q9Zg8zzF4vJYUxuClIC0lOtrEZa9/E51uhzzP2bBhA1rptTi3sYbZ2VkefPDBKu7tLLWkxtj4OG/83u+lMTrC4swJDh06RLvdxlrL5ZdfDkCtrlEyP+mUWUdVkqQD5bG2jvRbfjf+5j3/B9//gR/pl93fCONwtGf8n/Z68c9t3vyRl11KfMYzVWZnr28MDZe/4Mrez0Y+EhhppStjbw3S5VQVklWiPd5hipSi7FNr1sh7fcrSkuclM9MLZL2cc889j6HJjcxPHedrX/s6C4tzhMoTKMnoUJM86xLgcaZACU4B25iKucKvBikc9VqdtMhxHkQUkOUlRsLwyGZ2nnMZ3sfUmg2KolhToCply6O15sSJEzzyyCN0Oh2MMURRRL9fKZKXXnopu3adw8joCA8++CD333c/73vf+6jVa9TrEd71ntUpA+CEQ0qLdQnITSfieHLBSfM6GYmH8Ppnif/hV18pNq9aWtLy9J/sqNf5Q+XMu4RxCDPQxNeBXaY9giSgzHoEtSZFt0+YNHjkwYcZHh5l+9nnsHBihq/dfTezC3M0GwlRFLA4P8vEcBVH7izNU48jBA41cFtGUUAYSZwrAVd9pwAcSb1OWpRYLwiSBoWxtNOMN735bUTRGNYrrDFYTtrI67VmIQTWWOYX5nn0O4/Sbre5+JKLUUrx1FNPsbS4xPm7z+fNb3ozQRSRpf2BrqAxZZdntdGh0imkxboApSfRycZ5RO3f8puPferFFu69EL2qOWh2/safVqLzn7EZ2GJgfqyaXoPMkMH0bYwgiUfAVQb03MwJHrjvfg4d2I/FIoQnDBS1WBNqyYaJERZmppHeIIVHCY9UYi1/DGHQgUKpSjUIAkUYarxU9PICHdRABix3U+J6kwsuuJQwaOAGBsoqX7w7yR93Gq+0Vhw/PkW9XqNeb5Cm/VOUromJCcI4hjAEWz142IJetzdw1eq1siSJR2JQUUhWSOLk/Lcx/mOvWJpPud4zebDTyZZxR+o2Yp2feFVInHM4YxDSE4QhQZRAOMLS0VnuvPM2ZqdPIHEUZU6YhFUxnc0xRQEGeiueRhwgPBhbDmxaUQEceJTU6BCUEkgJKpRYX6IDSaQi4qTB4krKxZdeTmNoFOslzgFrtvGq52s9wKeCbaxjdLSFUpVPPooqs06Iqmpkfn6W8fFxQi0rD5A1IDWHDh5menqOt77trRR5ZbiEgagqUIoS7zxZ2dsdw/97wDY6Gw6EqRhWYbFWniOEQGqFkAzycEO+dssd3Pqlv0RIy/YdW8jTKs3I5EU1LXsL3hNHMVnaweUZUSCp1SKCMCbPU+JQoEOJVIIgkEjlERqCQOBlyFBrmHaa0+l2uPSK7yGMmjg0rgCPXavHP+mfeB6wy5IoCikH+ehBEAyiY9VBDk5PsW/fk/zdt1wNgNQBBJrzz7+QudlvcNdXv8aGyUkmJyepjw1DaTAmI6zXKbXbcabxeOHqtldAGnnByTOtVlmA0B4RaWQSIqKosjHzkm/dez9ZWjA8PMr8zDyLi4u4gX/ZmRJhDVhLrBS2zNc0+DzrkqcdtKrW7UBJ4kARRpIwrKZvHWmSekw/zyitZ3LDFsKoTlY4lE5QwWqvlYFZKMwzx+p3gyGVwHlLUeQEgcJ5i3UGY0qMKbnk0kt5+OFvs7zUJu3n2LKALEMPDXP1O9/J9u1n0W53+fZ3HmP//iMcn1ri+Ill0r6hzP32M43Hqwq2g81CBCADEBKvVdXlInAQWXApNu2Bijh86DhHjx7FW8toa5jOShstFf1uF+FBGE8kAmKhkdZjC0OkVyXXIZUh0oJIQygdWnm0kGitiaKIKK6ho5h6axRI2LJ1F0oOkcSjeBegVUwQJaggQCpR1XdLO4hhFyAMUnqkFGtD66qIoV6vVffrHFIKkiSkOVRHCM9VV30vn/n0Z9EywTtBURSQdrF5zjm7L+J73/p2rv6+d9BPHVNzOcu9mK/f811mZ/JtZxqPVxVsnB31wuGlw6mB099TTZHGUqYFtvDMHTnBDdfdiPDQGm5iipxGo4FzFlOWeGOrpbO01KKYvN8nUINmN+KkJIaBQCk/CJJIdKTRYYgOI6IoIU7qhHENHdaQQR10gtT1SrJVgFIKqSRKSqRUgynZD+LULxzV1VqhdLWP95U+csmlF1MWBXmeI6RHBwLnDM6VmDQFY1GtFhdc9DqaI+NYHzE5cRYnjs6PnWk4XlWwfdjZ5FQfdIqUJQIBRkIGPoUgaBGGTfY9cYjFxTY7d+5gcnKcE9MnEMJjraM0ZrAmDuqhtcDYErkGwEnAVSiRgUAogdAQJTXCpEaU1AmihFpjiLhWR4cx6ACCsNoqDbIaSipQEqnVau5xlRwoxfPdKgBRFFX5aqK6tipdyvK6i3fz6T/+fzCmh/MpiIK86OF9QXd5gdmnn6bb7rD7gl1cuPtcNkxOMDJa27Zv3+9GZxKPVw3svXv36kAWLekd3qym8AhwClNo8lTxuT++nk9/6r+z/axdrCx3aLfbbN26lTiOca6yjZ0rKcucwhq88lhbonW1Vq45ZzA46RCKapnQILUmiCPCqGqRFSZ1ovoQcdIkjBIIY1AR1U4ah0RoCUoilELIKtNFCIlcLQt+AdI6QA5KeCtlz6G04z3XvIOVlTZ//hfXIWWA1DFJMkS3U3L0yAz33/cYjzz0XR659wF8UbB15w42TTZr28e37j6TmLw62nhx46V7f2Hn7yDkOD0PhQYd4IsSaz1f+MKXOXjgEAtz8ywtLQ5JSToAACAASURBVDFUmyBJGkRRxP3338+2LZtBGGZmj6LDsPJhu5JWa5TllXlCbdGhRwhHEEjCSFKrx4S1YCDVChVXQEodoMOEKK7hvcJ4Sa3RAq8gaUBm8M4itaiyQ4UHJ/BWYF0GSLyTlVTo1adpQM6hlB6s3aqqJVuzNjxSebzzOJ/yI//o73HHHXfgTAhOMzO1wDfveZAiFwS6hnKaE515hBNs6/dpTk7go85fl+VNvxQER34bXnnB/hkG+85W0V/6RWnTf+6ybo4zhEFS9R/zAdYYvvWtB3l633HS1IKrkUTQ72dc/LpLcMawtLzMgcMH2Tg5ytln72RpeZ4s72NMgdZiIMkDe33VpwyAwQuHF6D1qpQqUAFCBQgZ4lAYJyvNWydgKhYIFYAqwRUDlnjwHu9VZTYKjxdVrphYNxmqQVH+KVLvJQzafghZ2ZvewbazNvGe97yXe791L8eOzDI9tUwSj1CLR1BhjbIQRGGIN7C8uMJiv8+O1tBTnd7ir4Zi4486f/tPNIbffdcrQeeMTeOd/IsfLLP2d4WxP2tTfWPY2HjR0YPHOnm3gzX5wIMEWsVolYCLmRjfhiDiiSefZnp6jtbICFIrdBjSS1OOHD9GEIVs2LSRoeEmSkuUrGLNa86OAeBOOpw0oDwyEJViFoUEYVSt0WENOVizg6hOutLD5wXIsFq7RQBKrq3PXorqIVj9LCRKKbSUayOIIlQQIIQ8NVEB1vQIIS1ClSAKxsYbLC/PsGnzOO945/exadMkSktKUxKGIXGY4I1EmICAxoxq/Nhlw8HkjykZJHFkvprnX/zM1NQt4y8Xo1cMdq93+6ZeeeNNWvVvENLmheGaaPIjP8xSOBfFo82vfvWuKj1HCJQWBGFIp7NCo1Hj4z/+YwwPN5mfn0cGir/5m79ZCzg4AVpput0u7XabOInRWhHqQbiRNaFDUEW0pIdA6kH6cDWFy0AjgkoZK9MSEdSoDw1TmJJ2rweUoF1VqaFCpFAIoat1WnqkEKiqoQehkARCooWs1t4gOrWjg5eAqrZer7G3kn5PGEm+7+o3cdVVr2fHzm0sLi3gXFXYYE2VyWKNw3mFsEkVRK//wGciN3Fpnorfl6L/IxMTy9/J8+s+8HKwegVgC1H0bvpYInqP1o27Rpnwt3T42IX10b9/GwCfeiBrt92Ud4qv3vU1+p0O1lhe97rzOfe8zVx82U6SoaqcdahVI4lDuv0eKgjITVnFtE1JN+1TWksc1ThxbBrpJWPDY4y2RqlFEVootNAkYYLLLcJ4pBVVCNJYnFQ4qTAOdNQCKsWsNTHJ0tIsvd4c6BR0AUGIEDHaC6SzhN4TOkk9rNMI60gvENYhRaUHmKzEmqpdphxkogihEMQIYvDhYFRKW1FkxElIlIQcOLgf5ypHjVRVGnKgq6QH5wUiaHXXWN1681J99JpPYFtvlUZ2tLdfKLMbvtDv37j1JSH2sgIhi3+5LQ2X/igO1PcLqx6g2/gYk+96RoL7wft/9ytHnr73be3lDldddSWt1jBSCKwrcc4RBjErKyvsf+ppPv/5z5OmKWNjw7zjnW9nbGyItL/M9h1b6Pe7PPbIfRx4/BHGmhHC5zRqEY2hECkK6klIa7SBdYawnhDVmgSNEYJ4iLAxRJA0EWENjwaZoEQMIsJbw/LKAlKVtMYnBp68DGwPbM7y3Anmp2eYn17kDW94E6AgaICOcc7jqEwsIYoqfZiQSn6qyJ73qzl3VdBKa02eWaSocdONt9NtC6KgRRKPkIQRw40IqWB4dJKkdfbnt33vT334GbyfuqXGePnLqe3+b0VBmoQbfzr8tW/+9xfTQ/WlK2jZl3/C1Hq/brNcmSDee9Ot/N979rzr2ZvWaX9ISEsQSe762l3U4zorKx36aZfRkXGCMGRoaIgwiMnykuHREd59zXu55JKL0NIRNqro1ViZs3HTOLsv3IUve3SX5zi47wnanYxQGrSXlDWHCKvY0aDrKM45vHV4VyJthhMagcMLg5AFQktaQ4o065EtHiRWin57nl5njiztUOYpppehXZ8Hvnk78/M5F178BrbtuhDjHVKfzr6T/dhOoUEn5F7XIoi58ytfZ36uTRyOsH5y9ety1AwcelaeVi1Bf1aXN/13qbNPm2L2WvcvL9oTp7f+zHPlAK7B8Xxfrqf+0eu3qJb8r85n75Za/zW6+fEg+uCje/Y89z5lnu0PggBED6UF3W6f5eUOZVEwM/0k42OT3Hf8Qd76trfy3mveC8Cll15CHIdYm0NZDvzSgiCO2HbuuSgNmJzzL7yAL97wZ0g0zms8mtyUOOPBOFRpMT5H6rQy3axDBRFCOYSsepJiQXpLPZLgoOzO4spFhG+jXY8i7yCcwZV98jQl7TmsrYIxYa2OKU6zhp41MWEApte4UvClW+7gyOHjtIbGq4dgrQ/bqnNotXkPz1tjFwQ/+ACPXX9lfnbwSej+gvXlA3bl1p8MW9dc/1z7vKg1u+je9MNyqPyOkOatUoaf/JVff/wtjcYHH32h/RrRyANhkCCEZGhoCGdBi5AydygfcPjAUcaGJ3n0O9/l9tvu5MtfvoODB49UPmZVOTgq9bvqQeWDCEcAOiQcHeey73kjzfGNxENjdAqHQZGXltI68oHXrTQ53lXFBFW4Uw9MMrXWU8tbhytKMCWUBZRFVRRYOsp+gbRgcoO1nu3bz6r21SfNrtU+bFUnh6Lq5uANlY0u8E6QZ3Dnl+9l+ngPSZMil+BDhFBUWrtfKzIoioJWo3n/CwJz0Z4iSj70S9bX3+JUeEKp9C/Mys3XsvDZoWf7+fNL9tKdLRMv/Lrw5Y8j1BN90/gHw8PXPLx37/OI8zqKG5OPl4Wk1WqxstRGrGqpXoP3SBkwMz3L+RdewLZthqkTR+l1u5U9G6oq/jsgL6ikY5B5IoBzL7mcc3efD96wMHsUS0bSSMjznJn5OZwXJICLFHnfEtqq7aRURWVqeY+1GcbmWNPB5T3yPCXP86p6pDSUpcUUUJaV+9Y7j/Ae0+1VjXDX06qf3kMFtEdIgbOwf98Rvvvoocq3kCQoETyD/UIIVDWsIH7RRX612ofvnZq65arJVvEfZVD8RN+Jq2T3tp+MG+/5yvrfPadk9/s3vT7Xs9/wpvzxgPg/xSv6iuHha15SleHorh86FqjW8aJw1Gu1welODu8E9cYQ3/72Y8zOzLN1y1ls374TESdrhXEVFxzCUzW6W31Y0FihcEEESY2RrduY3HEOzYkNjG/azO7zL2BsfJRue5mV5UVM0ccWbUy5jB0MUy5TlssYs4wp2xiXUbiS0lazgwW8kFhEpSGjuOVLt5D3e0j5PJPiAHRjS6QIsBYeuP9hVpZyTBFiygDngpNT+OD31jn6aUpruHWsddGexZfC682b39fX9Q99onDqvVb6IR11/zLNr/uF9b955hULIforX/iEFt1vGm832KD2Lpof/tmX1crJe+9E/JX2cobWqz79k+ua0oqhoSF63T6Lix0W5hcZHx+vgF6zEp5d6fGiakYrwogST2bBlxasA1H5xpsjw+zYuYNjBw+T91bI+0vk/UXy3gJFb46iN0fZW6ToLpD12hRpnyLNyLOUol9Q5pY8sxSFWUtAnJ9f4Nvf/s4zuiI+k49VVUiVmQr79x3CWYk1ArH2+orBg7+uHyoiwMnay25WHzc+eEeaj1zWy7lNyeLfl/lnbu90PjMBp4O98Nkh2p//XBDkvyfQ30CJS+L4g3e83BMDTG7f+a16Y4I88zQaMVFcJQRKqQZLskSLAC00S/MrPPX409UUK/VaVmc1qu5GVZJ9FQGTsuolLkVAHMeVNut9VQEiRRU+DEJCJyCtQoplr03eWSJdmSXvLJB3Fsk7KxTtNu2ZWYpODzKwmSPt5hRZlSYklcDaqth+aup4dY51AxjY0xIhqqIXUZVxIoRiZGS0ys6RAms8gU6QUg7y0TVKRJS5ozmyiTIev/sV8Xzymunf+o3HPuDL5F8o/FubSt1bdm59yxrY3e71F9tYPuRc9vesq/1q8CX1znr9oydeyUkBgkb9FqUjXyXXlTSbdaT0VTHc6ho3eMKN8SwvrWD7KSen+3W0FrteL+knpWO1Y6EfdCb0SL77yLcJlKLMckyWY9Ick6WnjrT6zpYOXzhMbjC5xRZVlWlpSsqyRAeaWq3G8ePHn9ELdY3WdTkOgxhjPFpFbNmyDakdOvDU6hqpqqie1hqlJUIrao0hdFAn0aO3vVK+792710W1Pb9t+0Nvx6p6gP+qBMg7f/6Diep/FU+zIP6BuPH+T3KGXuK2+ew9R3Rcu68wBZnJaDabjI5WnYiqxLxBV18UWgXcfNOt/M1ff6vKnPenrvEvjgb9S0W1z5HDR/FO0O/06XfSweiv254cRb+g38/I0oIsLShLuzZM6Un7OWma0u+npP1nW9Xkum0lsd5JBAG1WgOtIYwNOupx/gUbURqU9ujAogOHDARB1Hxk46UfPGOtTYKRPffMLzUvN0T3yqL7Z78U6fTzygXHlZ58Q/xCFZkvg1ojkzdaBEnSYH5+nqSW0BwaIgwDwiAgDEOCMKwke7nDLbfcxszUNBVweh3op9IzvH/rfdK+aiyrg4gsK8hSQ9EvKNJTR7667RfkeUlZGPK8JM+rtbosHOXA5JdKYoxh586daP0cbxFady3WghQR3gX0OhlxohEq54q/cx6TG4cQ0g4sQIFUoMMakxNb/vhM8X2Vxs/6wJRuvvONUmv1bzDJV544Wn8z8TsOnOkTAWzevOXPms2xvNlokUQRS/OLDDeHGB4apshzwjCo2msIhZIR3W7Kf/uTa8nzEhHXBoqNP2WKPL1aw/uBX1qoqk21UHinuGD3xczOVC0u89SQpzl5WpCnOVk/o0xLbGHxFtJuSr+dUxaeNC0pC4+zVSxVSgjCEO89b3vb2wjC8FQ7G2CtS5LDexAiQMmQ2ZlljhyeIooVH97zA/yd77mc41NHqpSnQcRMqogobhWdMHlOp8grJVmUzd/Z+5uPv3f37g+c3rL3jNHI2XuOhMnwraa0gzJdSbfXY7jVYmx0bI2J3lexX+8Ex4/P8Bd/fiPL03NIqdFhcmqSvnBVNsgp2vrJtbuSckmz0SLPS5QKSLspeacg7+SDbUHarUbWzQdKkyYIqvSiIIgIggitQwIdkeclSb1OY6h5qmnIafbC4BryzPLdx57i93/vj+j1Ms45Zyc7zzuHoijodDooWYVNw6BGHLVQunHzWbs/MPVq4SDj5nv++cupCHypNDy67dO1WqM6qZI4a5mbm0MIwc4dOwdTejxYwysJPfD0Yf7z7/0B1177OaanXvgleZ7T1/iqIXw/q9ZdazyuPG0YhysdrvS02106vZROu0enV9LtpHS7Gb1uTreb00+zSgqlXHubkFuXC3+K4uglTz25nxtvvAVjBFFUJ8tSXFFw5PAstqxCsUFQvSGhFo/5sQ1bf/dM8vx0enWzS9fRjst/9LYNG3c8IIQgjkOSWkwQabIsY25ujrPP2cX4+DhSapytpDuKEvr9nMcefZzPXntdBZZ/tkzPZ0q0cBpvod9LsQb6vYxOp0e7e+rotPt0Oj1Wuill4SlyKEpJWUBhoCghM5AbSFPodPr0+xnCVT3J11phCTlwfa6yVXHk8AmcrWrCpYSrr34LUkdMHZ8d6BQCPZBsFTYeGjl/zz2vJgavGdjg/ejk1mtHW6ODxM4qQVCFAVJqpk9Mk9RrbN+5c9DFoMBZT5pm4DXtlS6PP/4kSkpEoPDeDrI4V5WySlJEGOON5OD+I3zuT6/jr+74KlEAWdYnzUt6haVfGHqFrf4uHf0Cshx6qacsFPgYpWuULiAfjMxLdJjQTz3f+uuHkCoAbxG+xA5saUSAGsQCnPWMDE8iRcTY5DBhIpjcuJHl5UWWltuoICIMQ3RQdU8cGtrwS682Aq8h2DCSmf82NrF5TmqFxROGMWEQo7UmCAI6nQ5Hjx5i06aNbN9+NknSGAQSFJ1OykMPPYJ1kHZ6z9TEB+SLSsO+47avYHKHLTzOgfWCwkFpKokt1w9bbU0psEZgSrClpDSS0orB9wrrNPiAfU8dHGSlnvQTWC+qxnvW4p1kcaHH/n3HGB3ZUHWYsIalpQ4Hnj5Omhq8F6ggJC8NcaNx/4Yr/sEXX23+v6Zgc9k/Wd68ffu/mNi0naQ2hFQBOgoIQ4HSFh1Wr3g4cuQoJ05MEcc1Nm7chpRVxsdTTxxiaaFHktSf1RwrTeXhSuKYkZExsrSgyH0FpFPkZTUtF6UYbE+OvARTesrCY0pPYdwgAOYpCzClpZfmmIHdnfdznukDqKJd7ZWSm7/wFU4cW8aUASaDVm2Cv7z9bh77zn5qjRb1xgjIkHqzRdyIfvG1YP9rC7YQorVp6yO7L7no6PD4BHE9QWlJEDGopzbU6glJElOWjtmZRWZOLDLUHOesbbtIkhaPPfokzp4G9JonziGVxnnBli3bBn5thzESbwNKI8mtpLDVthqC3K6TbuMHA4xxg78dxgjK0mG9otvP0CpYF8GrhveeIvekXTh+dIn2SoEzmkZjBCkjnAlRIqlmsyhkcvMWLr/qe/KdF+78Pjp3XPAcXDtj9Kq/NmIve+W/5s1vzLu9d+mVP98T62z3yIYRv/O8s3232xVFL2V8YpgT5TRRpMlzQxDEBLpAyZC0b5k6MocTJaMbGhw7Oot3AaXJBm2oBj1CffVuD4CyKHh6/0G8UzgrKK0gL0SleBmDFKAG7TP8oHDQW4svPK501WuUhcSUVT4YovLjm9JjnCXN+9x774O8/qoLCeKQsjRIqSiMpN+z/Omf3IDJA+q1YdSgm7ySMZqEJEkQUpCXGUFtQ1s2oiOlMJ8sxfFPlp1rH5Q6ukn56LZarXgIzowXc5VeHcne97sR/I/3pOm1f/Dz5twDrlz8OqL412E8tFja+ifxyXlZEf5kvTlSJelJSxh4anFAGAaVORLXEAQk8VAV5LfVe0Lu/9Z3OHZ0mjCMn3H5MqheEeG8Z3Z2Fu8U1miclRhTOTkQGi8CEAGlGazHFkorEEi0EgOAdKUv+Cr5wHqFCiJarTEa9RbHjk4TBNU1RGEdKWKUaHHP3Q/T68JQc5w4CYmTkFqSUEtqRFGEDgKMc6BCiIZ+PBj6yMV5OXpxlAz/n2EoIil7/86KlfuWutmhtPj8H/TMF95zlOuTMwHLGeu8kGVfOAfCd1ibv8eK9tvwedN7jHDxrWE4dGfsm18kecfJvpxCiIdv+7Xr52f3fyhgmUOHDpHnCe1OSZ6VlKUhCRN6vfR/tnfmwX4V153/9HK33/I27bsEEkjsGMQWYzChMMTbOLFSTmJnktjjOKlkJkmVg2e8FOOaSSWVqZpyTBzHSSa2g5nEGGNiO97AgI1ZLQNiE0iANpDQ299vu1t3zx99f0/vCUlIxgY7NUfVpfpJv9+9ffvc7j7n9DnfLxPjU5Qmx6kUK7tccOEpvO/978K5Lg6fGuRcjilT8l6KKyK+8PkvEos60jqKtEdSi5iYmSY3BaLKAbf2EDidMyUNHSGto9YYoAAcmtKCE4rCQVpYpqZbzEx3GRhp8NH//idEjciHVjP43u0PcN+9D6NdAx1ENAciBgeb4ELiOCaJFPFADSsVS1ee+tVzrvzg2w5Th5ji1rVhN3ubteYaS365lDJSys0IF98mzdA3w3p4J1y+8+UA7o4kP/Yy3hn95rJ6kl2Byn8BkV8WSU7LbA8h5WhA/C9GNL7TSNy/wZb2ES/gnBt6+LPv63VHz0p70xsWLV3E6Is9aoUDa5AV9WItaTApWlgLSocgLTue2svMdE6zKWeLBDxvpmJsdIYv3vhVTCaoaUkcxAQqJk4GaRBQFgVC+moOpSS2n7pblmAKyjzDCIlzkhdHJzDVoUppITMKR0AYD6B1gpQDPPnETtJezgP3P8yeXROIsk5QaxCHAqUqkjd8lYqOQuKkSX1wybaRJaf9xyMNyhA8R41PAJ9g+63NfE39rY7uldbYXxKy/ctZJ8fy2Rek++fbhEjutmV8Rzz4pp3Ho7Pjm9nXXae5dvMKkJfj3CWYzsWo7HSUkFg6EDxYGn2Xbgz+65137n3iRLien/z+9ae8cGDrvSJrjaTThl47Y3yyRbud0mpnLF26kp07dlEUBZ20gzEpUjne81tv57I3rqew4wRJHbKCMivBxnzh81/mhT0HEUZBCWEoGRhs0O52SPMexqUI6ao9XiJsSFnkLFzQYGz8IMYJhocWMD4+jbEKkJRWkrvYu2DGUJiSDaesY3R8jF6aEuiEejJMEEZEsaBek9RqijiOCXVCGDcIw0FGFq+aWL50wyUrNm956njHyMtNqt1esDFSM9eUJrvcWXN5GNbquBBngudxbiuy/IEp8gd2HRBbjxT+fqmyD3x5MfXmJly+rlS986xJzxIiO9siBq2NwKlC6fAeibyrLOVdE11x3/JXyHi/7faPXfPi6O5bZvaPRmWeE4WesmG61WPBgkXsfm4fWVYw3W5jrcEYy4WXbOK33nsFlskKKSmk17I89KMnueM799FtW2q6jrWGMBA0mwndrEeW9bAuxylDoAOUVsQ6ptvrcNkVr+eOO24HpwmiOuPj07gqfai0mtJFGKtwzmJwLF2ylHbHL1y1Wo0oSkjCgKQOtboiiCRJGBEGCUmygMbwmnz1ujPeuvycd3z7lYwXADv+Kuot3XCRdeoCJeVlivxS4VoDQuQ4S4FTB7QOtyLcTmB3WQ7vEt3WLd+SVo6AHVaiOFlwCAnfOZeB3R0ocY+R0cOqNnS/EFfd734KEEsvPPnpP3jswXs/2Z6aZGJygqHGECDJspJdu3ZRFo5OtyDPS3q9DoMjinf/5ps465w15OUMwmp6bcUXPnsLzz3zIknQpCwFzliCABrNmKLMKm7OEicdqiJLPfu809m06VQ2nXEWDz30MAdemOCBBx9hfKyLMxG4sMpJ88axlB4QZ8nSJXQ7HaRSDDQa1LSmloTU6oooVkRRgApC4miQ4YWr3OCSje/ZcPF7vvCTHrtZmfz6GiK3Gex5OLOxzDrnIswyIV1YuGG0k7ZpHIUQ6kdKhXdZ7E7h2JGm+slGp/VsP/esH/X9aUFpLd/0gevHDky5Z7PH/iopkOMz00hg4cgwq1Yv4+DBMaRUdHoZWQ5ZWvCD7z/AptPWEkYxRWF49tld7HvhIL3MeAgXp8hLg5ECXTqMleRWYk2IcI7CZIhAcP8Pf8SVV18BQwOsWbuBm758PUr4cKm1AdjIR8bogfa5c1L69GghhK9uUZJGElJPAoJQoaVA65ggqKHDZja8ZPUfnfzTVDTA8Jt3A7uBLwHoOnDgn+rUasudGNr02nNxHibb7/3UBx595Ief6ExPhtIWaAx50UUhCIMGk9MtDh48yPTMGHFN8O7ffDubzlwKCspujX+58Wvc/f2HEGWEUjFSCOKaREpIagnjY+NI6aGsdGgRQcE5527g/M3nsn79Rp56ejfbn3iGH9z9I7pthzOJX8qxqMgQRqADTaADli1fRpqmhGHI8EAT1+uQRIowCYnqDYwMaA4vytau3PRra1//gVte67GdZf/5WZGFqzb/MJ3aeadz4ZYi7UU4S7OW0O60mJlpgXU0BhosWrQYgWbfvj0sXzlALfEZId///v0c2D9GXKt5C75CTSptiRABrXYPB5S28HlkzjI6Os5ddz3IYL3JDZ+9kdZUF1cKXClRBEg0QljC2BEnIQODTRqNOosWLSTQ2oPpSKhFAUEUIMMQpyMWLFs7uWDJyW8/5dLfe8U5ZT8J+ZlTNsDyky7ZY4vpL2edzhvKLF8SKkXWTSlMjnUlRW7I0xysxyhdvLzOstXLSTsZzglanS6TU5NkRUFSj9h0+imMTYwhZEi72wVpQJZYDL2swNmIolsyMzGFyy2xjsD4MqJaFDLYiBgeqrN42UKaA3XiSBMGiqLIwJUEWhGFAXEckdTqJM1BBhetePTU0866eu15v3NC9Bo/TfmZVDbAwhWnj0c7pj7HgnB9WvTOqDUiwKCUt4atFUgV0GpNo8KSpYsXMzA4wqqVq+l1etjCMjI8Qi1OmBgfp1FvkkRNSmNIEk0Uhz4rRUdEQYN60iSSikatwfJlK0iiOsNDw9RqCYEWQEnhCkQf4jqOqNWSKuKnCcOYIKmTDI6wePX6WwY5+W2rLvqNl8+4eBXlNadUPpas2rKltwre9eAPPnlLe+q566c60wsjoYmTOlNTM5RZTqPeoD0hKToJXdFFaU2v02b04AGkqFfZnSF5r2TRophmrYYQjtIYBuqHwIikAyUcZVnQ7uZMTkwRJjFaaUQgCJMI4xxxFNFIGkSJz6oxxr+A8cAA0fDC/SvWnv6fN57/O196DYftqPIzO7PnyorVFz6u4vGbNWod2PWtblcm9dgD1EpH3stpt1osX7mMKIpYuGAJ42NTdNoZga4hVUwQxERxTJamCKF9giKqin87rPM53EhNvdGgtAYVhgRRSJhE6ECTRNpb2oHECYEMAoQOqA8PmtUbTv/CyjPOeNvJm9699bUer6PJz5w1/nIyvu+Gi3Zuf+q6yReff1PWmqTozJC2pknqASrSnHv+ZlYsX8NMK+P++x5iz+4DHNg/TqAThoaHmJqc8jDSxp9UzYrwlrYQjgULFtBqtdBSoZTPE1PCEIUWrQUqriOCmKg2xNDiZV9ZuXLldSvP+MAjr92oHJ/83Cm7Lzu2/t1F488/fW3anvil3vR4GAYw0ZqklxUMDS1Aq4jpyR7794+hVYBzgkZjkKmpSYTwDL1RNB9TzrkCpQWLFi2i3elUSIeeNkJLqIWCMImJa8NW1htfXLN+w5//PCi5Lz+3yu7LvvtvWPniwX2/k7XHfnOqte9kXOErQpyo6JUdeZ5jjCFJEvI8Jct7lEVBqD1ktPUcx77mSoeEQYjSiiiKPMeXUPR9MAAAFO1JREFU8gbYyMIlO+uDIzeOrDrp84s3vOOZ1/bJT1x+7pU9KzfdpBjav7nVnbpyfHz0mlarfd746EQkpEAKh1QKKX0YuCgzj8pUlR55rDpdpT9pTAV1sXDBwiwIwq0jI8PfGB5e/FV+8fe2/dRCiK+CvDrKvunxxjO3/cv9vdbzBG5+8sW8Gr3ZBGxdRaFLlPZ8XE6WzKuSNaCwHrrSGgQFUhqUhlDqQalZZo2VWZaRpR3yvEBJ6dlvbZ8OQs1WVva7oYKIOIlRQYRWyqbd9FnjTK60ptPJSZI6eWnIjSUOEmwVSHYIhK3hbMXwIwzCCbABuAiHxIgU4SCphqAnSnqBDEbOWXfd2muvu/EnO+gvlVfH9YrTONy75zR5cBeBeynVkZc5lZjIWdgKqUTF9eHdIwBXGVb9z1ZYCuvnoxGCXLhZ8lOch7gK3Pw6iEBpj/BQ5XpbnGfoFW0QAisUmXOyyMx6hEWHAXUrcOUYoXNEytdUH6KV8AV8h/BULbKqPbMuxgoJqkA5S1z6jNRAgaqF1JcOLfkJjfQx5dVR9vjeMkoyHDmxOXLxibUC8FzURkhKl9OoS7rtGSAgCesIY6rvWqSVhEp6/O5IYfMUHdZQTqAMKKEoTXlosaiSIYR0aKUpygwqH7ksDM5aD3GhBVpLsjTFGUOkQkATWo0zpqpPEBjjKpwXR6/d8W6bKyidJQz9OfbYxATN5iCd3gRJvUlhPBWkp5+SyBKUUchXKe/z1VF2vcg67XFCV6IOh33sd0QohIOeFLSbMSaI6XQnSJKAsFDYPCNwnpJBOIkD0tKQKkFRi8kCyaAL0IXzJDGlIxACZyWltBihSZXGhJpMFOikQVAaVFYSKwnWM/plOuQFk+GaDaSDBMFA4bB5gTR+Fksn0UpRGEeapSRxTKk1bS3IlMQpjXEWs3CYnlAILTFYYitRxs4qXKEos/wlXsFPS14dZT/+uAsJ/bJ2NJB261BCksUR6975KwTLRuDA8zxw8y2MmJShQHmQefzWnklJHtVYeO7pNC96HUjBzNe/Q7pzN8J4QDph3SxKcE9rVlz6RqLTNpJGhiiUiMkW2774JcrpFs04olCSbNEiNr7jLbSbDWSgiA6MceBLXyV68SCBUkgHAos1Flc6wqhGuywZEzBw3lmceunFBBs3AQJ0CNt3svu+Bxl/9DHkVJvYWpSTWGFRQYDSkjJ7xYDDxyWzyt5+663NjStXNugc9o36CV6x05n/o24HNl+yvHHfQ2RHmdV9UUrSsY7gjZfDqmUwMUnxjduJbIBttZACbFW264SkpxTNM8+GN78FnKG2dRutp54hS1MGaw1MkVXAO5ApjVq5Ct78ZuIFNShSODCK+v490NtNnud0Jaw69xyiN11NtGQJlDlMTMF370FMzoDpV42CVGCNwuqQSRSbrrqK+nvfA4N1CPpITwrWrWfNpW9kzTe/w6Of+QfqhUVag0KSFxlFYRmKggXc8M1lrF507PE+XDeHS/2w79SBMLSceeaLMEfZK2TjNx769Of+Ro/up6kjyEpCrXFIcuWNIKybt7vMrUsGEH1L23m4i6JMia2j1u0g2z2UnQurMV+cgNJaVJxUpTUBGEVARFm0iMAbOQKUrQiFjKkgn5VPVED4sqIoxJgS1e+fECAFZaOOHhjwHGNRDRYtZ2DNBsrnDmJNSVsrktNOg/pCMDEEMSQSq2OUiAhtgXIlVnjWXhVFTMoAfcp66v/p96AxAFkPdu6EmTEYGYKVayBuwlVv4pSnnmHfbd+i7iRRoOi0Zhis13jxgW0fdo898+FMSUwFESJnnaRDE2Su5zTLQDXHnSkLH0twUjNdGtKBOiPnnPbwuu3bL2TLlnxW2c23/uKnT3roB3rvzm1/RSmFrMDewL+oFsCZOZ2Yo+zqhrIyoJzwgYpACpT0Na22zL3r5I5ujBgss8Uec9wsWcFi2dmXxFu8VliP7S399lAoMNLf2wKqj1pc9XkqnWYpKUQJppehlGLRGWfx9B130wwjTCOEVSs8kVxOlZ7jWQYMAotEuUMZrd1uh+5gxMkXXgQjCyHL2XbLrTx16xeppzMk9TrnXvMWhn77d0E4oosvwXz7NoQKKIwBLXB5jpmcxE3NEM5RrO/z/JVwHgWzm69oD0KgKJwkk4Iyili89Ix7Vy1efDVbtuT+SebI4Mc+dv1gmIunb7/3E3QLEemQoPJnbQWrKecoV4j+4FeGiwDpKtA3B844CmMohTdoZmmx5uF/VerzxjhGVq6LTEGlOJkhnUUbKGexxzyQvFE5pcrRKvf3q/hmDt8slAVBSUkLRBusYv/ze1m5Zi3xOaeTNhqoXpt40WJYvRpsjptoI5YuBFci8R5CLjVGghQ5wvmqkrSXEw4u8MiIqsPefY/StD1WOJAHp9j/lW8wtP5sGBqB8RaRDHG9jE7WIh5KMM56nDzrDTc5Z6sTx1A2gLRz68FByoBOViAWL2LZKevvXfz6zVfz7nfP9L/yUgPtQ//jk6eIj7vd37v/k9noFFivPOkswrp5b5xHyvefPQqUwwHCeWszCmKMLXHCs/KV2dF87P5V+h2vXphqhlrhXTLhwPUZfwRzarwAJEYcKo53FW9cH17MCdCJB74lSxnbtYeV60+FJUtRw8NMZh2WrFkNtQh6LfY9+RSrlrzBP3/1shfSxwKUk/5584Lm8CDFzDS6zKCuePP73sv+4QWM/egRpva8gM4y7vyzP0dZGC4tA6VBS0lSa5AVGRbn8dGlQM2hnfBPNF+cnQMz4uZ/wVT9M2GDpWecfm/9jVddw5YrZ+b+/shr6rUfu37N69/wh2Z40HVwGGcp0gxlZ0Mevjk/awJT7aHCL6Ol8rOwZwtE4IHey6Lwy3sFX2XnFOP1jahDxfRVsZzVWDS5kqQajPJkak5YcJKg1OgyBOPDnFZIvw1UUioopO+TERKjE88+lBleeOxxv1SLkHWnbiJP6iw47zz/ovWm6Y7towJGQeL3/P4WERhJXMJgcwCVdXnmrn+D1hhYDStPZtmffJAzP/G/ufB//RnL3/NOFpx5ClESE1i8LaQClHCEThAhkRUOi7WFN+yqZo23+kvLvGaNHyvlQl+aZKHQmnZTsvSS191bv+Ssq9ly5fThaj36Bvpfr71+3ZVX/a4dGSl7FZKgFXPQ+6vW30/lvBVm/mX7aP/9oIkPdPjXxuKNEjO7JfQRFLyypZuLSnQI6UA4vyf3kRaOZAv0X77ZUCgKXADGorsZTEyCUoysW8O4hpHTNkEY0nrsUZp5Wa1qc+yEOfgtFokpSuoSzO69HPjkX8OBSRhteaiGwSH0WWew6j3v5swP/SkX/Pq7yBoxrh7RM6mPzSNQtt/Xl4UL96PjJMJ51MTCOUqp6TrBlIQlm8+6o775nHlL99G1crh88I/+bv1b3/KHbsFwoQcH/KypBlZWDSSl9EutdBJhJcqCsnK2ydmZO6sG/5cLcYSkSpOpOQbYLNmLV2hc+qaObzyOKMpCYhSIEKyiaLeZ3vUMuALO3kh80mpYtRKimP2PPk09c1UM3WAxYA2B8xGwVFt6ylE4Q2Q0g5lm6u5HeeaDH4WbvgLbHoMDB8Fo/7atWAa/8lbOev9vMNmQlLWQXp4hrDu0oh1DFf3xU+7QGBghSYVi2kEx0GDF+ed/rVZf8EtHUzQcT1Dlv/z+p9eOHxjdd//WG2VHh9KV/oZzFGiRONlH4+13/qWamUtYW0gf6CiEBmEJrEWZuSQvP1kRDnTp/MEEFpfm7Nn2KGeevhHWLqdx6loIJLR7TD63jzUDS72yha/+0JSzRYClcEjtUAZKHLZeR0hNZ+9etn3pZia+/M9Eyxdz0gWbWfL618OmU70tcOlm5NduptjTpRZHUJ44bpHtr4pCUkYxPWlZfc4ZNzfOPvvXeP/7i2P99riCsvrjH7957S9c+qssHsmLJCJ3IEWAcH7magfC+pnphDeU+ktzv1kBoROETqBx5KGgvW4ZwflnEa9ZQ08q2kVBakrvSkkJxlBa418MZ+bEuX8ckbjc+nJuA6GD6eeehU4boog3vOOXPQTDxAzdgxOEJZV/XsXUBZSyxEhPGuecoxTQqgWsesvlnPSrV7Pp6jcihGB5mtN8Yjutr32du//ndXQe+C5kByGxDK5aRq/MvXfS71k1cfx91BGaqAxEcKGPfRgV0JaCda+/6OaB41C0H4HjlY996NbVb3jdr5aLmnnRCBnP2rPW76wFPOfz4Y1qX1fW77uphjM/+t9Y99FrWf3bv850M6HVjBALmxB7iiXKEmF98sHLogAfh3hicm9AaGdp79kNU5OARS1c4AMzu/f5gm2ofMlZDHCEK7AUOIwHytUhWaAItrzdt3dtobdgCKsEg3GMSrvY1jT59MTsSKcV5VWZlbOmrt/2qLbFI4uvaE1Ii5wi1mSNmPWXXXRz/ZSTj0vRcKLF+B/6+K2rrrp4S75kIDfDNboB5Koy+aWslpj+ZQ9vh5ZxI72yCRSECjadxPSaYfYOC8SGZbBwwJucBw4SO0lNaqJZyuMfX4yoVgzp3cMg7cK+5z0zQBSDlex6/Cl6ZU4qqxfD+iaNQTmLdqV3LfFEq2lRwoEXYLAJq1ay4V1bmFq2hOdrEc8PJCRnbGJ486XgEuhklDNdYhWgKjorK/xeHNj529zhIh24siCIQmYCy4pLzr05OHntcSsafpyDkD/46L+eJP/yvftu/uY/uaI7z9rtd6ovh8/F/sx3eJwytm2HK5bDyEKu/uhHYPQFWL7SE6EWDrPtcXSaoqSgyDOUMPPsAouuoii+B4G1aJyfeUp4+0pYZN8DELby4Usia+lOTMMzz8EF5/re5iXTzz6LzHpom4Hx5HPSeKdduvmMfXmeU6/VeeQr/8rZZ5wJccTwNVdz0Zmb4NmdsGgATloH9SaUBnbsJt21l7jTpTSeDVgcYzYfLmVRUEjFhgsvuJOTj39GHxqxE5UbbhjIf/jY73dGJ5DGc02a6o+cdcmsbxxqCEumfUgTF1LLNU9/9XbYMw49YMlaOP0CGFwGXQF3P8jWW24hyXoUNsVoA8IfkQZGIm3oqZscYCWYkijLCZ0/rHC6mjLSUWrnqzZLA702OEvS69IsJZPbd0GvcrPGxug8/RSLJQRZF8o2ZG3iQGOdqkByQt/QCAlyepLatsexf/9/oDMNgYNlK+AXLoONZ0N92B8O7XqWHX/9Nyxt94hLS24NxrN/UlbNA3QeveXCUeA4uGvfhUxOXnGiqjuxvPEbbhho3fHtb+1/csfFQeGIfLgBW60/atbQcJ5Fz5Mozx5Lull2G4Vwit5MjwMP/4gFEqQOYXoKdjyH++btPPyPn2U47ZCYFEWJEAbpk3/wlBGaXCmieh09MYZ8dgftrVtxk1MeDF5KZsNwCEopCZtD1Ho9eOZpprc9QtJOSWdajCQh7NgBD2xl5sntNLOMWiDRzsJzu8geeZJ0dAIlRRUzqP4IqAcBYZoxuncfo088xlCeI62Cbg4vjsKOHYx96xvs+ML/pXlwnFovRQtRoRo7HAJX5cE53DHXcq0DpA7I0zyYGZt558DB8R9y0ebjTnw8/hy0G78+PPaNf/76xNPbLx5RMTItEaWZtRLBL6NHPhXz4gMH3k93QlLqiCKJmcSQO4OWApemDBhLUOTUqvQihJ01BnG6OhTR5ErTlYo00gRCMJhm6NyDPig5f9HKlKRIEnpFTiAMrihQCJCKTGqiKEGnOWWnQ6AkxAGtKrtlsBSEZUnZJ2Wb85RhGGKdYTrtUcQJIo4praAW1bFlic1ShLPUlMC2W0QV3LQ1tmIamOtjHwoaHS7SgRYebbkQmmkLcsWy3upLXvcOPnztt45Hhcen7Bu/urC849v37n5k6/qoLJBpQaLDSoHHr+zZ6JPwmSYGQS/L0ImHr1QOIilRCAIl+oAAABgpvSEo5Cw5TFaWOAvJgD+7dr2CQKl5xOZz+5DmGWGowXl05Nz6tCRpBLY0JKEHJcrLDCEUUmoPTVnlwPUNUIvDWl+XLaU31BQSaT1XuNIakxdgPGVVnyUoK3PCMMDakizLiJPwpZG/oypbkqcZcVRDqIiecXQCTbh0UW/leWe/g49/+GUV/vLKvv7zC9oP/OD2qaefOlvlqQ9+zOlPPyQJ3q06lrJFdTJlpKUUkFuDk4Iw0uRZiRae3rDvT/eT+YST89w6f6hm/JJa3UNUS7fWoV8WD3su57xVraUkL4uqv1T+spnNT1MoMAKpVLXt+Jk898n8PSXOuQo/1d8f6w+LnHPYKhgjpM+YqQURLs+OaXG/nPTpMGz/2FUpMqC5bHG66KLzP8BHrv3csX5/bGV/7qYV6W233/b8Y49sHFAgSvOSzvaVICvD7HiVXUjInUVoiQ5DFq5e/e1pVZvpqUMuVh/WQqGYl4Cs8MERZWYRIUz/C+owQvPqSgCh8fVbvdxUVwVMjlGHru6VrVAKDPnsv2LUSy5rMP77avYWsx0xCozKCY0hGp28PH3x4MJXEvL14yz7eTI4JFIp8rJAxwlmaNCuvOKy3+VP//jvj3aNo7ten/rHVb07v/ed/Y9vOzVWoKMamTFHPILrW+FzjwyAOXne1RFo/7PzS3ESJsxkGdHAIMF/eOcfL9yy5YkTHYSfB3nhA79+Vz5+4A1BdW5w4jJ3ZH0oWkiHtd47cb0WhSnk9tvv/NuNTjuu/cN/ONZV5ssNN6w09zz43dEnHz+1AdSjkKx35AQoeWwDclbsnJdE4PegIi2IdOwDE7zyoMnPqrj6AE4cvtqciHhXVrpDZ4XOlkhr0BJipUhsgRgfl0/f+d3P8Gd/8d4jXeWlyv7Up1aNfu07dzy/c/v6UEtk4JcKKb0rEthDTVlbRZOqA36Omjs62+nZGzsQuUEa6zNe/v3qGuEiROlPBE/sh/ZQozrWrUKr/QCSxuFsgbYFAzZHHtwv99xz92e47rr3HX65+Xf/9KfXvnj797578Mnt68P5uySyn2TAkQKhJyJ21vA5fI//9yraaJ9K8kpEzEkawaIQVfaQQTpvNAelIc5T1Ni43HvfA3+bf+Qj82b47FiP3nzzhifuue97E88fWD9Qa1Bm+bzQ54lsNf1DkSoV7RWeVv1/OSQvv3YqC7KVYl6cknt++ORnpv/iE3/Q/7//B9sXUJEPa6BzAAAAAElFTkSuQmCC" style="height: 75px; width: auto; object-fit: contain;" alt="JSPM Logo">
+          <div style="text-align: left;">
+            <div style="font-size: 24pt; font-weight: 800; color: #1E2761; line-height: 1.15; letter-spacing: -0.5px;">JSPM's</div>
+            <div style="font-size: 20pt; font-weight: 800; color: #1E2761; line-height: 1.2;">Jayawant Institute of Management Studies (JIMS)</div>
           </div>
-          <div class="team-box">
-            <span style="color: #64748b; font-size: 11pt; font-weight: 600;">UNDER THE GUIDANCE OF:</span><br>
-            <b>[ Guide's Name ]</b><br>
-            <span>Department of Computer Applications</span><br>
-            <span>JSPM's JIMS, Pune</span>
+        </div>
+        <div style="font-size: 16pt; font-weight: 700; color: #1E2761; margin-top: 4px;">(Savitribai Phule Pune University)</div>
+        <div style="font-size: 14pt; font-weight: 700; color: #1E2761; margin-top: 6px; letter-spacing: 0.3px;">T.Y.B.C.A. - Semester V</div>
+        <div style="font-size: 13pt; color: #5B6280; margin-top: 4px; font-weight: 500;">Course: FP-301-MM - Major Project</div>
+      </div>
+
+      <!-- Project Title Box -->
+      <div style="margin: 25px 0 20px 0; padding: 25px 10px;">
+        <div style="font-size: 26pt; font-weight: 800; color: #1E2761; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 12px; line-height: 1.2;">
+          ATM SIMULATION SYSTEM
+        </div>
+        <div style="font-size: 13pt; color: #141B4D; font-weight: 600; line-height: 1.4;">
+          A Tiered Desktop (Java Swing + MySQL) &amp; Cloud-Ready Banking Simulation
+        </div>
+      </div>
+
+      <!-- Submission Requirement -->
+      <div style="margin: 15px 0;">
+        <div style="font-size: 11pt; color: #1B1F3B; font-weight: 500; margin-bottom: 5px;">
+          Submitted in partial fulfilment of the requirements for
+        </div>
+        <div style="font-size: 12.5pt; font-weight: 700; color: #1E2761;">
+          Bachelor of Computer Applications (B.C.A.)
+        </div>
+      </div>
+
+      <!-- Student & Guide Box -->
+      <div style="text-align: left; max-width: 540px; margin: 20px auto 10px auto; padding: 0 15px; font-size: 11.5pt;">
+        <div style="margin-bottom: 18px;">
+          <span style="font-weight: 700; color: #1E2761; display: inline-block; margin-bottom: 4px;">Submitted By :</span>
+          <div style="font-weight: 700; color: #1E2761; line-height: 1.6; padding-left: 10px;">
+            1. PREM TODKAR<br>
+            2. VIRAJ PIMPALE<br>
+            3. SHAM LIPNE
+          </div>
+        </div>
+
+        <div style="margin-top: 15px;">
+          <div style="font-weight: 700; color: #1E2761; margin-bottom: 4px;">Under the Guidance of</div>
+          <div style="color: #1B1F3B; padding-left: 10px; line-height: 1.5;">
+            <b>Guide's Name :</b> [ Guide's Name ]<br>
+            <span style="color: #5B6280; font-size: 10.5pt;">Department of Computer Applications, JSPM's JIMS, Pune</span>
           </div>
         </div>
       </div>
 
-      <div style="border-top: 1px solid #cbd5e1; padding-top: 15px;">
-        <p style="text-align: center; margin: 0; font-size: 12pt; color: #475569;">
-          <b>DEPARTMENT OF COMPUTER APPLICATIONS</b><br>
-          JSPM’s Jayawant Institute of Management Studies, Tathawade, Pune – 411033
-        </p>
+      <!-- Academic Year Footer -->
+      <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #e2e8f0;">
+        <div style="font-size: 12pt; color: #5B6280; font-weight: 600; letter-spacing: 0.5px;">
+          Academic Year: 2026 - 2027
+        </div>
       </div>
     </div>
 
     <!-- =================================================================== -->
-    <!-- DECLARATION -->
+    <!-- DECLARATION (ResumeForge Reference Design) -->
     <!-- =================================================================== -->
-    <div class="page-break">
-      <h2>DECLARATION</h2>
-      <p>
-        We, <b>Prem Todkar</b>, <b>Viraj Pimpale</b>, and <b>Sham Lipne</b>, students of <b>T.Y.B.C.A. (Semester V)</b>, hereby declare that the project report entitled <b>“ATM Simulation System — A Tiered Desktop (Java Swing + MySQL) &amp; Cloud-Ready Banking Simulation”</b> is an authentic record of our own work, carried out by us under the guidance of <b>[ Guide's Name ]</b> and submitted in partial fulfilment of the requirements for the course <b>FP-301-MM — Project (Major Mandatory)</b>, during the academic year <b>2026–2027</b>.
-      </p>
-      <p>
-        We further declare that this report, or any part of it, has not been submitted previously by us or by anyone else for the award of any degree, diploma, associateship, or other similar title of this or any other university or institution.
+    <div class="page-break" style="padding-top: 25px; font-family: 'Calibri', 'Plus Jakarta Sans', sans-serif;">
+      <h2 style="text-align: center; font-size: 18pt; font-weight: 800; color: #141B4D; border: none; margin-bottom: 40px; letter-spacing: 0.5px;">DECLARATION</h2>
+      
+      <p style="text-align: justify; line-height: 1.7; font-size: 12pt; color: #1B1F3B; margin-bottom: 24px;">
+        We, <b>Prem Todkar</b>, <b>Viraj Pimpale</b>, and <b>Sham Lipne</b>, students of <b>T.Y.B.C.A. (Semester V)</b>, hereby declare that the project report entitled <b>"ATM SIMULATION SYSTEM â€” A Tiered Desktop (Java Swing + MySQL) &amp; Cloud-Ready Banking Simulation"</b> is an original record of our own work, carried out by us under the guidance of <b>[ Guide's Name ]</b> and submitted in partial fulfilment of the requirements for the course <b>FP-301-MM â€” Project (Major Mandatory)</b>, during the academic year <b>2026-2027</b>.
       </p>
 
-      <br>
-      <p>
-        <b>Place:</b> Pune, Maharashtra<br>
-        <b>Date:</b> ____________________
+      <p style="text-align: justify; line-height: 1.7; font-size: 12pt; color: #1B1F3B; margin-bottom: 40px;">
+        We further declare that this report, or any part of it, has not been submitted previously by us or by anyone else for the award of any degree, diploma, or similar title of this or any other university or institution.
       </p>
 
-      <br><br>
-      <div style="display: flex; justify-content: space-between; font-family: 'Plus Jakarta Sans', sans-serif;">
+      <div style="text-align: right; margin-top: 35px; margin-bottom: 50px; font-size: 11pt; color: #5B6280; font-weight: 500;">
+        Place: Pune, Maharashtra &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date: ____________________
+      </div>
+
+      <div style="display: flex; justify-content: space-between; margin-top: 60px; font-size: 11pt;">
         <div style="width: 30%; text-align: center;">
-          <div class="sig-line"><b>Prem Todkar</b></div>
+          <div style="border-top: 1px solid #94a3b8; padding-top: 8px;">
+            <b style="color: #1E2761;">Prem Todkar</b>
+          </div>
         </div>
         <div style="width: 30%; text-align: center;">
-          <div class="sig-line"><b>Viraj Pimpale</b></div>
+          <div style="border-top: 1px solid #94a3b8; padding-top: 8px;">
+            <b style="color: #1E2761;">Viraj Pimpale</b>
+          </div>
         </div>
         <div style="width: 30%; text-align: center;">
-          <div class="sig-line"><b>Sham Lipne</b></div>
+          <div style="border-top: 1px solid #94a3b8; padding-top: 8px;">
+            <b style="color: #1E2761;">Sham Lipne</b>
+          </div>
         </div>
       </div>
     </div>
@@ -304,7 +331,7 @@
     <div class="page-break">
       <h2>CERTIFICATE</h2>
       <p>
-        This is to certify that the project report entitled <b>“ATM SIMULATION SYSTEM”</b> submitted by:
+        This is to certify that the project report entitled <b>â€œATM SIMULATION SYSTEMâ€</b> submitted by:
       </p>
       <ul>
         <li><b>Prem Todkar</b></li>
@@ -312,10 +339,10 @@
         <li><b>Sham Lipne</b></li>
       </ul>
       <p>
-        is a bonafide work carried out by them under my guidance in partial fulfilment of the requirements for the award of the degree of <b>Bachelor of Computer Applications (B.C.A.)</b> of <b>Savitribai Phule Pune University</b> during the academic year <b>2026–2027</b>.
+        is a bonafide work carried out by them under my guidance in partial fulfilment of the requirements for the award of the degree of <b>Bachelor of Computer Applications (B.C.A.)</b> of <b>Savitribai Phule Pune University</b> during the academic year <b>2026â€“2027</b>.
       </p>
       <p>
-        The project work has been examined and approved as satisfying the academic standards required for the course <b>FP-301-MM — Major Project</b>.
+        The project work has been examined and approved as satisfying the academic standards required for the course <b>FP-301-MM â€” Major Project</b>.
       </p>
 
       <br><br><br>
@@ -363,7 +390,7 @@
         We are deeply thankful to our <b>Head of the Department</b> and all the esteemed faculty members of the <b>Department of Computer Applications</b> for providing the necessary laboratory infrastructure, software resources, and supportive academic environment that made this project possible.
       </p>
       <p>
-        We also convey our appreciation to the administrative and library staff of <b>JSPM’s Jayawant Institute of Management Studies (JIMS)</b> for their assistance.
+        We also convey our appreciation to the administrative and library staff of <b>JSPMâ€™s Jayawant Institute of Management Studies (JIMS)</b> for their assistance.
       </p>
       <p>
         Finally, we extend our heartfelt gratitude to our parents, family members, and classmates for their moral support, patience, and motivation throughout the duration of this academic endeavor.
@@ -374,7 +401,7 @@
         <b>Prem Todkar</b><br>
         <b>Viraj Pimpale</b><br>
         <b>Sham Lipne</b><br>
-        <i>(T.Y.B.C.A. — Semester V)</i>
+        <i>(T.Y.B.C.A. â€” Semester V)</i>
       </p>
     </div>
 
@@ -471,7 +498,7 @@
     <div class="page-break">
       <h2>CHAPTER 1: INTRODUCTION</h2>
       <p>
-        The Automated Teller Machine (ATM) is one of the most widely deployed computerized transaction devices globally, serving as the frontline digital interface between commercial banking institutions and cardholders. As modern software systems transition toward distributed cloud architectures, understanding the engineering fundamentals behind reliable transactional processing — including data consistency, cryptographic parameterization, concurrency isolation, and client-side threading — is a cornerstone of computer science education.
+        The Automated Teller Machine (ATM) is one of the most widely deployed computerized transaction devices globally, serving as the frontline digital interface between commercial banking institutions and cardholders. As modern software systems transition toward distributed cloud architectures, understanding the engineering fundamentals behind reliable transactional processing â€” including data consistency, cryptographic parameterization, concurrency isolation, and client-side threading â€” is a cornerstone of computer science education.
       </p>
       <p>
         The <b>ATM Simulation System</b> is an educational, production-grade practical project developed for the <b>Bachelor of Computer Applications (B.C.A.)</b> curriculum. It faithfully simulates real-world banking operations, including account authentication, real-time balance inquiries, cash deposits, cash withdrawals with overdraft prevention, transaction audit logging, and receipt generation. The software operates entirely on <b>simulated virtual currency</b> and an isolated demonstration database (<code>atm_db</code>), ensuring complete safety while preserving the exact technical rigor required in mission-critical commercial banking systems.
@@ -506,7 +533,7 @@
       <h3>1.4 Functional Modules</h3>
       <ul>
         <li><b>Authentication Module:</b> Validates account number format and 4-digit PIN; manages active user session state.</li>
-        <li><b>Account Balance Module:</b> Queries the live ledger balance and displays it formatted in Indian Rupees (<code>₹#,##0.00</code>).</li>
+        <li><b>Account Balance Module:</b> Queries the live ledger balance and displays it formatted in Indian Rupees (<code>â‚¹#,##0.00</code>).</li>
         <li><b>Deposit Module:</b> Validates positive amounts up to 2 decimal places and credits account balance with an atomic transaction log.</li>
         <li><b>Withdrawal &amp; Overdraft Protection Module:</b> Evaluates available funds, locks the row, executes debit, and dispenses virtual cash.</li>
         <li><b>Mini-Statement &amp; Audit Module:</b> Renders an interactive table displaying transaction ID, date, type, and amount.</li>
@@ -563,7 +590,7 @@
 |   +----------------------------------+  +---------------------------+   |
 +-------------------------------------------------------------------------+
       </div>
-      <div class="diagram-caption">Figure 2.1 — Layered 3-Tier Architecture of the ATM Simulation System</div>
+      <div class="diagram-caption">Figure 2.1 â€” Layered 3-Tier Architecture of the ATM Simulation System</div>
 
       <h3>2.2 UML Diagrams</h3>
       <h4>2.2.1 Use Case Diagram</h4>
@@ -588,7 +615,7 @@ User   |                                                         |
        |   (( 7. Logout & Eject Session ))                       |
        +---------------------------------------------------------+
       </div>
-      <div class="diagram-caption">Figure 2.2 — UML Use Case Diagram of the ATM Simulation System</div>
+      <div class="diagram-caption">Figure 2.2 â€” UML Use Case Diagram of the ATM Simulation System</div>
 
       <h4>2.2.2 Sequence Diagram (Cash Withdrawal)</h4>
       <div class="diagram-box">
@@ -611,7 +638,7 @@ Cardholder       ATMGUI       SwingWorker       ATMService     DBConnection     
     |<-- Dispense -|                                                                 |
     |    & Update  |                                                                 |
       </div>
-      <div class="diagram-caption">Figure 2.3 — UML Sequence Diagram for Transactional Cash Withdrawal</div>
+      <div class="diagram-caption">Figure 2.3 â€” UML Sequence Diagram for Transactional Cash Withdrawal</div>
 
       <h3>2.3 Database Design &amp; Schema</h3>
       <p>The relational database <code>atm_db</code> consists of two normalized tables managed by the MySQL InnoDB engine:</p>
@@ -631,7 +658,7 @@ Cardholder       ATMGUI       SwingWorker       ATMService     DBConnection     
         <tr><td><code>transaction_id</code></td><td><code>INT</code></td><td><code>AUTO_INCREMENT, PK</code></td><td>Unique audit transaction reference ID</td></tr>
         <tr><td><code>account_number</code></td><td><code>VARCHAR(20)</code></td><td><code>NOT NULL, FK</code></td><td>References <code>accounts(account_number)</code> ON DELETE CASCADE</td></tr>
         <tr><td><code>transaction_type</code></td><td><code>VARCHAR(20)</code></td><td><code>NOT NULL</code></td><td>Transaction type: <code>DEPOSIT</code> or <code>WITHDRAWAL</code></td></tr>
-        <tr><td><code>amount</code></td><td><code>DECIMAL(12, 2)</code></td><td><code>NOT NULL</code></td><td>Exact transaction value in ₹</td></tr>
+        <tr><td><code>amount</code></td><td><code>DECIMAL(12, 2)</code></td><td><code>NOT NULL</code></td><td>Exact transaction value in â‚¹</td></tr>
         <tr><td><code>transaction_date</code></td><td><code>TIMESTAMP</code></td><td><code>DEFAULT CURRENT_TIMESTAMP</code></td><td>System timestamp of execution</td></tr>
       </table>
     </div>
@@ -683,7 +710,7 @@ Cardholder       ATMGUI       SwingWorker       ATMService     DBConnection     
 
         // Step 2: Validate sufficient balance
         if (currentBalance.compareTo(amount) < 0) {
-            throw new InsufficientBalanceException("Insufficient balance! Available: ₹" + currentBalance);
+            throw new InsufficientBalanceException("Insufficient balance! Available: â‚¹" + currentBalance);
         }
 
         // Step 3: Deduct balance
@@ -724,16 +751,16 @@ Cardholder       ATMGUI       SwingWorker       ATMService     DBConnection     
       <h3>4.1 Test Cases &amp; Execution Matrix</h3>
       <table>
         <tr><th>Test ID</th><th>Module</th><th>Scenario Description</th><th>Input Test Data</th><th>Expected Result</th><th>Status</th></tr>
-        <tr><td><b>TC-01</b></td><td>Auth</td><td>Valid Login with Demo Account</td><td>Acc: <code>1001001</code>, PIN: <code>1234</code></td><td>Login successful; balance shows ₹5,000.00</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-01</b></td><td>Auth</td><td>Valid Login with Demo Account</td><td>Acc: <code>1001001</code>, PIN: <code>1234</code></td><td>Login successful; balance shows â‚¹5,000.00</td><td><b style="color: #16a34a;">PASS</b></td></tr>
         <tr><td><b>TC-02</b></td><td>Auth</td><td>Rejection of Invalid Account</td><td>Acc: <code>9999999</code>, PIN: <code>1234</code></td><td>Rejection dialog: "Account not found"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
         <tr><td><b>TC-03</b></td><td>Auth</td><td>Rejection of Incorrect PIN</td><td>Acc: <code>1001001</code>, PIN: <code>0000</code></td><td>Rejection dialog: "Incorrect PIN entered"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
         <tr><td><b>TC-04</b></td><td>Input</td><td>Validation of 4-digit numeric PIN</td><td>PIN: <code>12</code> or <code>ABCD</code></td><td>Blocked: "PIN must be exactly 4 numeric digits"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
-        <tr><td><b>TC-05</b></td><td>Inquiry</td><td>Real-Time Balance Check</td><td>Click "Check Balance"</td><td>Shows current balance in ₹ dialog</td><td><b style="color: #16a34a;">PASS</b></td></tr>
-        <tr><td><b>TC-06</b></td><td>Deposit</td><td>Valid Positive Cash Deposit</td><td>Amount: <code>₹1,500.50</code></td><td>Balance becomes ₹6,500.50; log created</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-05</b></td><td>Inquiry</td><td>Real-Time Balance Check</td><td>Click "Check Balance"</td><td>Shows current balance in â‚¹ dialog</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-06</b></td><td>Deposit</td><td>Valid Positive Cash Deposit</td><td>Amount: <code>â‚¹1,500.50</code></td><td>Balance becomes â‚¹6,500.50; log created</td><td><b style="color: #16a34a;">PASS</b></td></tr>
         <tr><td><b>TC-07</b></td><td>Input</td><td>Negative Deposit Rejection</td><td>Amount: <code>-500.00</code></td><td>Rejected: "Amount must be greater than zero"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
         <tr><td><b>TC-08</b></td><td>Input</td><td>Excessive Decimals Rejection</td><td>Amount: <code>250.755</code></td><td>Rejected: "Cannot have more than 2 decimal places"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
-        <tr><td><b>TC-09</b></td><td>Withdraw</td><td>Valid Cash Withdrawal</td><td>Amount: <code>₹2,000.00</code></td><td>Balance becomes ₹4,500.50; virtual cash dispensed</td><td><b style="color: #16a34a;">PASS</b></td></tr>
-        <tr><td><b>TC-10</b></td><td>Withdraw</td><td>Overdraw Prevention</td><td>Amount: <code>₹50,000.00</code></td><td>Transaction blocked: "Insufficient balance!"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-09</b></td><td>Withdraw</td><td>Valid Cash Withdrawal</td><td>Amount: <code>â‚¹2,000.00</code></td><td>Balance becomes â‚¹4,500.50; virtual cash dispensed</td><td><b style="color: #16a34a;">PASS</b></td></tr>
+        <tr><td><b>TC-10</b></td><td>Withdraw</td><td>Overdraw Prevention</td><td>Amount: <code>â‚¹50,000.00</code></td><td>Transaction blocked: "Insufficient balance!"</td><td><b style="color: #16a34a;">PASS</b></td></tr>
         <tr><td><b>TC-11</b></td><td>Audit</td><td>Mini-Statement Audit Log</td><td>Click "Mini Statement"</td><td>Table renders all transactions newest first</td><td><b style="color: #16a34a;">PASS</b></td></tr>
         <tr><td><b>TC-12</b></td><td>Persist</td><td>Restart Persistence Check</td><td>Close app &amp; relaunch</td><td>Balance and logs persist from MySQL</td><td><b style="color: #16a34a;">PASS</b></td></tr>
       </table>
@@ -757,8 +784,8 @@ Cardholder       ATMGUI       SwingWorker       ATMService     DBConnection     
       </p>
       <ul>
         <li><b>Login Screen:</b> Cardholders enter their Account Number (e.g., <code>1001001</code>) and 4-Digit PIN (<code>1234</code>). A convenient <b>"Fill Demo Account"</b> button is provided for quick viva evaluation.</li>
-        <li><b>Dashboard Screen:</b> Displays a prominent current balance card formatted as <code>₹5,000.00</code>. Provides 4 large action tiles: Check Balance, Deposit Cash, Withdraw Cash, and Mini Statement.</li>
-        <li><b>Mini-Statement Window:</b> An interactive table displaying Transaction ID, Date &amp; Time, Type, and Amount in ₹, automatically sorted newest first.</li>
+        <li><b>Dashboard Screen:</b> Displays a prominent current balance card formatted as <code>â‚¹5,000.00</code>. Provides 4 large action tiles: Check Balance, Deposit Cash, Withdraw Cash, and Mini Statement.</li>
+        <li><b>Mini-Statement Window:</b> An interactive table displaying Transaction ID, Date &amp; Time, Type, and Amount in â‚¹, automatically sorted newest first.</li>
         <li><b>Printable Slip:</b> An automated thermal receipt is generated displaying closing balance and transaction reference.</li>
       </ul>
 
@@ -794,3 +821,4 @@ Cardholder       ATMGUI       SwingWorker       ATMService     DBConnection     
 
 </body>
 </html>
+
